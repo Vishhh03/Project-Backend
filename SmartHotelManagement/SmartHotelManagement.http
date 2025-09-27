@@ -1,0 +1,77 @@
+@SmartHotelManagement_HostAddress = https://localhost:7000
+@token = 
+
+### Register a new user (Admin)
+POST {{SmartHotelManagement_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Admin User",
+  "email": "admin@hotel.com",
+  "password": "Admin123!",
+  "role": 3,
+  "contactNumber": "+1234567890"
+}
+
+### Register a new user (Hotel Manager)
+POST {{SmartHotelManagement_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Hotel Manager",
+  "email": "manager@hotel.com",
+  "password": "Manager123!",
+  "role": 2,
+  "contactNumber": "+1234567891"
+}
+
+### Register a new user (Guest)
+POST {{SmartHotelManagement_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Guest User",
+  "email": "guest@hotel.com",
+  "password": "Guest123!",
+  "role": 1,
+  "contactNumber": "+1234567892"
+}
+
+### Login
+POST {{SmartHotelManagement_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@hotel.com",
+  "password": "Admin123!"
+}
+
+### Get all hotels (public)
+GET {{SmartHotelManagement_HostAddress}}/api/hotel/hotels
+Accept: application/json
+
+### Create a hotel (requires authentication)
+POST {{SmartHotelManagement_HostAddress}}/api/hotel/createHotel
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Grand Hotel",
+  "location": "New York City",
+  "amenities": "WiFi, Pool, Gym, Restaurant",
+  "rating": 4.5
+}
+
+### Get user profile (requires authentication)
+GET {{SmartHotelManagement_HostAddress}}/api/user/profile
+Authorization: Bearer {{token}}
+
+### Get all users (Admin only)
+GET {{SmartHotelManagement_HostAddress}}/api/user/all
+Authorization: Bearer {{token}}
+
+### Validate token
+POST {{SmartHotelManagement_HostAddress}}/api/auth/validate-token
+Content-Type: application/json
+
+"{{token}}"
