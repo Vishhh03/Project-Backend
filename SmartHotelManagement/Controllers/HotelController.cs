@@ -61,7 +61,7 @@ namespace SmartHotelManagement.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while fetching hotel with id {HotelId}", id);
+                _logger.LogError(ex, "An Error occurred while fetching hotel with id {HotelId}", id);
                 return StatusCode(500, new { message = "Internal server error" });
             }
         }
