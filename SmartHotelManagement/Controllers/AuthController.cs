@@ -1,5 +1,9 @@
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SmartHotelManagement.Models;
 using SmartHotelManagement.Models.DTOs;
 using SmartHotelManagement.Services;
@@ -23,13 +27,22 @@ namespace SmartHotelManagement.Controllers
         }
 
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
             try
             {
+                if (request == null)
+                    return BadRequest(new { message = "Request is null" });
+
+                if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+                    return BadRequest(new { message = "Email and password are required" });
+
+                var normalizedEmail = request.Email.Trim().ToLowerInvariant();
+
                 // Check if user already exists
                 var existingUser = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email == request.Email);
+                    .FirstOrDefaultAsync(u => u.Email.ToLower() == normalizedEmail);
 
                 if (existingUser != null)
                 {
@@ -42,8 +55,8 @@ namespace SmartHotelManagement.Controllers
                 // Create new user
                 var user = new User
                 {
-                    Name = request.Name,
-                    Email = request.Email,
+                    Name = request.Name?.Trim(),
+                    Email = normalizedEmail,
                     PasswordHash = passwordHash,
                     Role = request.Role,
                     ContactNumber = request.ContactNumber,
@@ -89,6 +102,11 @@ namespace SmartHotelManagement.Controllers
 
                 return Ok(response);
             }
+            catch (DbUpdateException dbEx)
+            {
+                _logger.LogError(dbEx, "Database error occurred during user registration");
+                return StatusCode(500, new { message = "Database error" });
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error occurred during user registration");
@@ -97,13 +115,22 @@ namespace SmartHotelManagement.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
             try
             {
+                if (request == null)
+                    return BadRequest(new { message = "Request is null" });
+
+                if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+                    return BadRequest(new { message = "Email and password are required" });
+
+                var normalizedEmail = request.Email.Trim().ToLowerInvariant();
+
                 // Find user by email
                 var user = await _context.Users
-                    .FirstOrDefaultAsync(u => u.Email == request.Email);
+                    .FirstOrDefaultAsync(u => u.Email.ToLower() == normalizedEmail);
 
                 if (user == null)
                 {
@@ -146,12 +173,19 @@ namespace SmartHotelManagement.Controllers
             }
         }
 
+        /// <summary>
+        /// Validate a JWT token. Expects the raw token string in the request body.
+        /// </summary>
         [HttpPost("validate-token")]
+        [AllowAnonymous]
         public IActionResult ValidateToken([FromBody] string token)
         {
             try
             {
-                var isValid = _jwtService.ValidateToken(token);
+                if (string.IsNullOrWhiteSpace(token))
+                    return BadRequest(new { isValid = false, message = "Token is required" });
+
+                var isValid = _jwtService.ValidateToken(token.Trim());
                 return Ok(new { isValid });
             }
             catch (Exception ex)

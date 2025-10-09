@@ -1,160 +1,275 @@
-using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using SmartHotelManagement.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
+using Microsoft.Extensions.Logging;
+using SmartHotelManagement.Models;
+using SmartHotelManagement.Models.DTOs;
 
 namespace SmartHotelManagement.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
-    public class HotelController : ControllerBase
+    [Authorize(Roles = "HotelManager,Admin")]
+    public class HotelsController : ControllerBase
     {
-        private readonly ILogger<HotelController> _logger;
         private readonly HotelDBContext _context;
+        private readonly ILogger<HotelsController> _logger;
 
-        public HotelController(HotelDBContext context, ILogger<HotelController> logger)
+        public HotelsController(HotelDBContext context, ILogger<HotelsController> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        [HttpGet("hotels")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetHotels()
+        // List hotels visible to manager (optionally filter by manager id or pagination)
+        [HttpGet]
+        public async Task<IActionResult> GetHotels(int page = 1, int pageSize = 20)
         {
-            try
-            {
-                var hotels = await _context.Hotels
-                    .Include(h => h.Rooms)
-                    .Include(h => h.Reviews)
-                    .ToListAsync();
+            var skip = (Math.Max(page, 1) - 1) * Math.Max(pageSize, 1);
 
-                return Ok(hotels);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error occurred while fetching hotels");
-                return StatusCode(500, new { message = "Internal server error" });
-            }
+            var hotels = await _context.Hotels
+                .AsNoTracking()
+                .OrderBy(h => h.Name)
+                .Skip(skip)
+                .Take(pageSize)
+                .Select(h => new HotelDto
+                {
+                    Id = h.Id,
+                    Name = h.Name,
+                    Address = h.Address,
+                    City = h.City,
+                    Country = h.Country,
+                    ManagerId = h.ManagerId
+                })
+                .ToListAsync();
+
+            return Ok(hotels);
         }
 
-        [HttpGet("{id}")]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetHotel(int id)
+        // Get single hotel with rooms
+        [HttpGet("{hotelId}")]
+        public async Task<IActionResult> GetHotel(int hotelId)
         {
-            try
-            {
-                var hotel = await _context.Hotels
-                    .Include(h => h.Rooms)
-                    .Include(h => h.Reviews)
-                    .ThenInclude(r => r.User)
-                    .FirstOrDefaultAsync(h => h.Id == id);
+            var hotel = await _context.Hotels
+                .Include(h => h.Rooms)
+                .ThenInclude(r => r.RoomType)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(h => h.Id == hotelId);
 
-                if (hotel == null)
+            if (hotel == null) return NotFound(new { message = "Hotel not found" });
+
+            var dto = new HotelWithRoomsDto
+            {
+                Id = hotel.Id,
+                Name = hotel.Name,
+                Address = hotel.Address,
+                City = hotel.City,
+                Country = hotel.Country,
+                ManagerId = hotel.ManagerId,
+                Rooms = hotel.Rooms?.Select(r => new RoomDto
                 {
-                    return NotFound(new { message = "Hotel not found" });
-                }
+                    Id = r.Id,
+                    RoomNumber = r.RoomNumber,
+                    RoomTypeId = r.RoomTypeId,
+                    Price = r.Price,
+                    IsAvailable = r.IsAvailable,
+                    Amenities = r.Amenities
+                }).ToList() ?? new List<RoomDto>()
+            };
 
-                return Ok(hotel);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An Error occurred while fetching hotel with id {HotelId}", id);
-                return StatusCode(500, new { message = "Internal server error" });
-            }
+            return Ok(dto);
         }
 
-        [HttpPost("createHotel")]
-        [Authorize(Policy = "AdminOrHotelManager")]
-        public async Task<IActionResult> CreateHotel([FromBody] Hotel hotel)
+        // Create room for a hotel
+        [HttpPost("{hotelId}/rooms")]
+        public async Task<IActionResult> CreateRoom(int hotelId, [FromBody] CreateRoomRequestDto request)
         {
-            try
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var hotel = await _context.Hotels.FindAsync(hotelId);
+            if (hotel == null) return NotFound(new { message = "Hotel not found" });
+
+            // Verify room type exists
+            var roomType = await _context.RoomTypes.FindAsync(request.RoomTypeId);
+            if (roomType == null) return BadRequest(new { message = "Invalid room type" });
+
+            // Ensure unique room number per hotel
+            var exists = await _context.Rooms
+                .AnyAsync(r => r.HotelId == hotelId && r.RoomNumber == request.RoomNumber);
+            if (exists) return Conflict(new { message = "Room number already exists for this hotel" });
+
+            var room = new Room
             {
-                var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
-                var userId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+                HotelId = hotelId,
+                RoomNumber = request.RoomNumber,
+                RoomTypeId = request.RoomTypeId,
+                Price = request.Price,
+                Amenities = request.Amenities,
+                IsAvailable = request.IsAvailable,
+                CreatedAt = DateTime.UtcNow
+            };
 
-                // If user is a hotel manager, set them as the manager
-                if (userRole == "HotelManager")
-                {
-                    hotel.ManagerId = userId;
-                }
+            _context.Rooms.Add(room);
+            await _context.SaveChangesAsync();
 
-                hotel.CreatedAt = DateTime.UtcNow;
-                
-                await _context.Hotels.AddAsync(hotel);
-                await _context.SaveChangesAsync();
-
-                return Ok(hotel);
-            }
-            catch (Exception ex)
+            var dto = new RoomDto
             {
-                _logger.LogError(ex, "Error occurred while creating hotel");
-                return StatusCode(500, new { message = "Internal server error" });
-            }
+                Id = room.Id,
+                RoomNumber = room.RoomNumber,
+                RoomTypeId = room.RoomTypeId,
+                Price = room.Price,
+                IsAvailable = room.IsAvailable,
+                Amenities = room.Amenities
+            };
+
+            return CreatedAtAction(nameof(GetRoom), new { hotelId = hotelId, roomId = room.Id }, dto);
         }
 
-        [HttpPut("{id}")]
-        [Authorize(Policy = "AdminOrHotelManager")]
-        public async Task<IActionResult> UpdateHotel(int id, [FromBody] Hotel updatedHotel)
+        // Get a single room
+        [HttpGet("{hotelId}/rooms/{roomId}")]
+        public async Task<IActionResult> GetRoom(int hotelId, int roomId)
         {
-            try
+            var room = await _context.Rooms
+                .AsNoTracking()
+                .Include(r => r.RoomType)
+                .FirstOrDefaultAsync(r => r.Id == roomId && r.HotelId == hotelId);
+
+            if (room == null) return NotFound(new { message = "Room not found" });
+
+            var dto = new RoomDto
             {
-                var hotel = await _context.Hotels.FindAsync(id);
-                if (hotel == null)
-                {
-                    return NotFound(new { message = "Hotel not found" });
-                }
+                Id = room.Id,
+                RoomNumber = room.RoomNumber,
+                RoomTypeId = room.RoomTypeId,
+                RoomTypeName = room.RoomType?.Name,
+                Price = room.Price,
+                IsAvailable = room.IsAvailable,
+                Amenities = room.Amenities
+            };
 
-                var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
-                var userId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
-
-                // Hotel managers can only update their own hotels
-                if (userRole == "HotelManager" && hotel.ManagerId != userId)
-                {
-                    return Forbid("You can only update your own hotels");
-                }
-
-                hotel.Name = updatedHotel.Name;
-                hotel.Location = updatedHotel.Location;
-                hotel.Amenities = updatedHotel.Amenities;
-                hotel.UpdatedAt = DateTime.UtcNow;
-
-                await _context.SaveChangesAsync();
-
-                return Ok(hotel);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error occurred while updating hotel with id {HotelId}", id);
-                return StatusCode(500, new { message = "Internal server error" });
-            }
+            return Ok(dto);
         }
 
-        [HttpDelete("{id}")]
-        [Authorize(Policy = "AdminOnly")]
-        public async Task<IActionResult> DeleteHotel(int id)
+        // Update room (pricing, type, amenities, availability)
+        [HttpPut("{hotelId}/rooms/{roomId}")]
+        public async Task<IActionResult> UpdateRoom(int hotelId, int roomId, [FromBody] UpdateRoomRequestDto request)
         {
-            try
-            {
-                var hotel = await _context.Hotels.FindAsync(id);
-                if (hotel == null)
-                {
-                    return NotFound(new { message = "Hotel not found" });
-                }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                _context.Hotels.Remove(hotel);
-                await _context.SaveChangesAsync();
+            var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId && r.HotelId == hotelId);
+            if (room == null) return NotFound(new { message = "Room not found" });
 
-                return Ok(new { message = "Hotel deleted successfully" });
-            }
-            catch (Exception ex)
+            if (request.RoomTypeId.HasValue)
             {
-                _logger.LogError(ex, "Error occurred while deleting hotel with id {HotelId}", id);
-                return StatusCode(500, new { message = "Internal server error" });
+                var rt = await _context.RoomTypes.FindAsync(request.RoomTypeId.Value);
+                if (rt == null) return BadRequest(new { message = "Invalid room type" });
+                room.RoomTypeId = request.RoomTypeId.Value;
             }
+
+            if (!string.IsNullOrWhiteSpace(request.RoomNumber))
+            {
+                var duplicate = await _context.Rooms
+                    .AnyAsync(r => r.HotelId == hotelId && r.RoomNumber == request.RoomNumber && r.Id != roomId);
+                if (duplicate) return Conflict(new { message = "Another room with same number exists" });
+                room.RoomNumber = request.RoomNumber;
+            }
+
+            if (request.Price.HasValue) room.Price = request.Price.Value;
+            if (request.IsAvailable.HasValue) room.IsAvailable = request.IsAvailable.Value;
+            if (request.Amenities != null) room.Amenities = request.Amenities;
+
+            room.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // Delete room
+        [HttpDelete("{hotelId}/rooms/{roomId}")]
+        public async Task<IActionResult> DeleteRoom(int hotelId, int roomId)
+        {
+            var room = await _context.Rooms.FirstOrDefaultAsync(r => r.Id == roomId && r.HotelId == hotelId);
+            if (room == null) return NotFound(new { message = "Room not found" });
+
+            // Consider preventing delete if active bookings exist; simple check example:
+            var hasBookings = await _context.Bookings.AnyAsync(b => b.RoomId == roomId && b.Status == BookingStatus.Confirmed);
+            if (hasBookings) return BadRequest(new { message = "Cannot delete room with active bookings" });
+
+            _context.Rooms.Remove(room);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // Manage room types (list, create, update, delete) - managers may configure types for their hotels
+        [HttpGet("roomtypes")]
+        public async Task<IActionResult> GetRoomTypes()
+        {
+            var types = await _context.RoomTypes
+                .AsNoTracking()
+                .OrderBy(t => t.Name)
+                .Select(t => new RoomTypeDto { Id = t.Id, Name = t.Name, Description = t.Description, DefaultPrice = t.DefaultPrice })
+                .ToListAsync();
+
+            return Ok(types);
+        }
+
+        [HttpPost("roomtypes")]
+        public async Task<IActionResult> CreateRoomType([FromBody] CreateRoomTypeDto request)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var exists = await _context.RoomTypes.AnyAsync(t => t.Name == request.Name);
+            if (exists) return Conflict(new { message = "Room type with same name exists" });
+
+            var rt = new RoomType
+            {
+                Name = request.Name,
+                Description = request.Description,
+                DefaultPrice = request.DefaultPrice,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.RoomTypes.Add(rt);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetRoomTypes), new { id = rt.Id }, new RoomTypeDto { Id = rt.Id, Name = rt.Name, Description = rt.Description, DefaultPrice = rt.DefaultPrice });
+        }
+
+        [HttpPut("roomtypes/{id}")]
+        public async Task<IActionResult> UpdateRoomType(int id, [FromBody] UpdateRoomTypeDto request)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var rt = await _context.RoomTypes.FindAsync(id);
+            if (rt == null) return NotFound(new { message = "Room type not found" });
+
+            rt.Name = request.Name ?? rt.Name;
+            rt.Description = request.Description ?? rt.Description;
+            if (request.DefaultPrice.HasValue) rt.DefaultPrice = request.DefaultPrice.Value;
+            rt.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("roomtypes/{id}")]
+        public async Task<IActionResult> DeleteRoomType(int id)
+        {
+            var rt = await _context.RoomTypes.FindAsync(id);
+            if (rt == null) return NotFound(new { message = "Room type not found" });
+
+            var used = await _context.Rooms.AnyAsync(r => r.RoomTypeId == id);
+            if (used) return BadRequest(new { message = "Cannot delete room type in use by rooms" });
+
+            _context.RoomTypes.Remove(rt);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
-
