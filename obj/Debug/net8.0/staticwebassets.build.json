@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "2YV8VjwadQBQSMvTdKS0seOfCurGO4Rk+844u+7dL/0=",
+  "Source": "SimpleHotelAPI",
+  "BasePath": "_content/SimpleHotelAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
