@@ -1,6 +1,6 @@
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 public class BookingResponse
 {
@@ -20,3 +20,7 @@ public class BookingResponse
     public int? PaymentId { get; set; }
     public int? LoyaltyPointsEarned { get; set; }
 }
+
+
+
+

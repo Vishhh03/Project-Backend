@@ -1,4 +1,4 @@
-# Simple Hotel System API - Troubleshooting Guide
+# FinalDestination API - Troubleshooting Guide
 
 ## Table of Contents
 - [Database Issues](#database-issues)
@@ -99,7 +99,7 @@
    {
      "Logging": {
        "LogLevel": {
-         "SimpleHotelAPI.Services.DataSeeder": "Debug"
+         "FinalDestinationAPI.Services.DataSeeder": "Debug"
        }
      }
    }
@@ -151,8 +151,8 @@
    {
      "Jwt": {
        "Key": "YourSuperSecretKeyThatIsAtLeast32CharactersLongForJWTTokenGeneration!",
-       "Issuer": "SimpleHotelSystem",
-       "Audience": "SimpleHotelSystemUsers",
+       "Issuer": "FinalDestination",
+       "Audience": "FinalDestinationUsers",
        "ExpiryInHours": 24
      }
    }
@@ -191,8 +191,8 @@
    {
      "Jwt": {
        "Key": "NewSuperSecretKeyThatIsAtLeast32CharactersLongForJWTTokenGeneration!",
-       "Issuer": "SimpleHotelSystem",
-       "Audience": "SimpleHotelSystemUsers",
+       "Issuer": "FinalDestination",
+       "Audience": "FinalDestinationUsers",
        "ExpiryInHours": 24
      }
    }
@@ -487,7 +487,7 @@
 // Check appsettings.json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SimpleHotelSystemDB;Trusted_Connection=true;MultipleActiveResultSets=true"
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=FinalDestinationDB;Trusted_Connection=true;MultipleActiveResultSets=true"
   }
 }
 ```
@@ -533,7 +533,7 @@ builder.Services.AddScoped<IServiceInterface, ServiceImplementation>();
       "Microsoft.AspNetCore": "Information",
       "Microsoft.EntityFrameworkCore": "Information",
       "Microsoft.EntityFrameworkCore.Database.Command": "Information",
-      "SimpleHotelAPI": "Debug"
+      "FinalDestinationAPI": "Debug"
     }
   }
 }
@@ -587,10 +587,10 @@ curl -X GET "https://localhost:7000/api/auth/me" \
 ```bash
 # Connect to LocalDB using SQL Server Management Studio
 # Server name: (localdb)\mssqllocaldb
-# Database: SimpleHotelSystemDB
+# Database: FinalDestinationDB
 
 # Or use command line
-sqlcmd -S "(localdb)\mssqllocaldb" -d SimpleHotelSystemDB -E
+sqlcmd -S "(localdb)\mssqllocaldb" -d FinalDestinationDB -E
 ```
 
 ### Performance Monitoring
@@ -614,3 +614,7 @@ If you're still experiencing issues:
 5. **Try the sample requests** provided in this guide
 
 Remember to include relevant error messages, logs, and steps to reproduce when seeking help.
+
+
+
+

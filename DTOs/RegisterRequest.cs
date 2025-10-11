@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 /// <summary>
 /// Request DTO for user registration
@@ -51,3 +51,7 @@ public class RegisterRequest
     [StringLength(20, ErrorMessage = "Contact number cannot exceed 20 characters")]
     public string? ContactNumber { get; set; }
 }
+
+
+
+

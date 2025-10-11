@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication State Management Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 3px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .status {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Authentication State Management Test</h1>
+    
+    <div class="test-section">
+        <h2>Current Authentication State</h2>
+        <div id="auth-status" class="status">Loading...</div>
+        <div id="user-info"></div>
+        <button onclick="checkAuthState()">Refresh Auth State</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Route Protection Test</h2>
+        <div id="route-test-results"></div>
+        <button onclick="testProtectedRoutes()">Test Protected Routes</button>
+        <button onclick="testPublicRoutes()">Test Public Routes</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Authentication Actions</h2>
+        <div id="auth-actions-results"></div>
+        <button onclick="testLogin()">Test Login</button>
+        <button onclick="testLogout()">Test Logout</button>
+        <button onclick="testTokenRefresh()">Test Token Refresh</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Navigation Test</h2>
+        <div id="navigation-results"></div>
+        <button onclick="testNavigation()">Test Navigation Updates</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Event Listeners Test</h2>
+        <div id="event-test-results"></div>
+        <button onclick="testEventListeners()">Test Auth State Listeners</button>
+    </div>
+
+    <!-- Include required scripts -->
+    <script src="js/utils/api-client.js"></script>
+    <script src="js/utils/storage-service.js"></script>
+    <script src="js/utils/router.js"></script>
+    <script src="js/services/auth-service.js"></script>
+    <script src="js/utils/auth-state-manager.js"></script>
+
+    <script>
+        // Initialize services
+        let authService, authStateManager, router;
+        let testResults = [];
+
+        function logResult(message, type = 'info') {
+            console.log(`[${type.toUpperCase()}] ${message}`);
+            testResults.push({ message, type, timestamp: new Date() });
+        }
+
+        function displayResult(containerId, message, type = 'info') {
+            const container = document.getElementById(containerId);
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            container.appendChild(resultDiv);
+        }
+
+        async function initializeServices() {
+            try {
+                // Initialize services
+                authService = new AuthService();
+                router = new Router();
+                authStateManager = new AuthStateManager();
+                
+                // Initialize auth state manager
+                await authStateManager.initialize(authService, router);
+                
+                logResult('Services initialized successfully', 'success');
+                return true;
+            } catch (error) {
+                logResult(`Failed to initialize services: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function checkAuthState() {
+            const statusDiv = document.getElementById('auth-status');
+            const userInfoDiv = document.getElementById('user-info');
+            
+            try {
+                const isAuthenticated = authStateManager.isAuthenticated();
+                const user = authStateManager.getCurrentUser();
+                
+                statusDiv.textContent = `Authentication Status: ${isAuthenticated ? 'AUTHENTICATED' : 'NOT AUTHENTICATED'}`;
+                statusDiv.className = `status ${isAuthenticated ? 'success' : 'error'}`;
+                
+                if (user) {
+                    userInfoDiv.innerHTML = `
+                        <div class="info">
+                            <strong>User Info:</strong><br>
+                            Name: ${user.name}<br>
+                            Email: ${user.email}<br>
+                            Role: ${authService.getRoleName(user.role)}<br>
+                            Member Since: ${new Date(user.createdAt).toLocaleDateString()}
+                        </div>
+                    `;
+                } else {
+                    userInfoDiv.innerHTML = '<div class="info">No user information available</div>';
+                }
+                
+                logResult(`Auth state checked: ${isAuthenticated}`, 'info');
+            } catch (error) {
+                statusDiv.textContent = `Error checking auth state: ${error.message}`;
+                statusDiv.className = 'status error';
+                logResult(`Error checking auth state: ${error.message}`, 'error');
+            }
+        }
+
+        async function testProtectedRoutes() {
+            const routes = ['/bookings', '/loyalty', '/profile', '/admin', '/hotels/manage'];
+            const resultsDiv = document.getElementById('route-test-results');
+            resultsDiv.innerHTML = '';
+            
+            for (const route of routes) {
+                try {
+                    const hasAccess = authStateManager.hasRouteAccess(route, authStateManager.getCurrentUser());
+                    const isProtected = authStateManager.isProtectedRoute(route);
+                    
+                    displayResult('route-test-results', 
+                        `Route ${route}: Protected=${isProtected}, HasAccess=${hasAccess}`, 
+                        hasAccess ? 'success' : 'error'
+                    );
+                } catch (error) {
+                    displayResult('route-test-results', 
+                        `Error testing route ${route}: ${error.message}`, 
+                        'error'
+                    );
+                }
+            }
+        }
+
+        async function testPublicRoutes() {
+            const routes = ['/', '/hotels', '/login', '/register'];
+            const resultsDiv = document.getElementById('route-test-results');
+            
+            for (const route of routes) {
+                try {
+                    const hasAccess = authStateManager.hasRouteAccess(route, authStateManager.getCurrentUser());
+                    const isProtected = authStateManager.isProtectedRoute(route);
+                    
+                    displayResult('route-test-results', 
+                        `Route ${route}: Protected=${isProtected}, HasAccess=${hasAccess}`, 
+                        hasAccess ? 'success' : 'info'
+                    );
+                } catch (error) {
+                    displayResult('route-test-results', 
+                        `Error testing route ${route}: ${error.message}`, 
+                        'error'
+                    );
+                }
+            }
+        }
+
+        async function testLogin() {
+            const resultsDiv = document.getElementById('auth-actions-results');
+            
+            try {
+                // Test with demo credentials (this will likely fail, but we can test the flow)
+                displayResult('auth-actions-results', 'Attempting login test...', 'info');
+                
+                // This is just testing the auth state management flow
+                // In a real test, you'd use valid credentials
+                const testCredentials = {
+                    email: 'test@example.com',
+                    password: 'TestPassword123!'
+                };
+                
+                displayResult('auth-actions-results', 
+                    'Login test initiated (will likely fail without valid credentials)', 
+                    'info'
+                );
+                
+            } catch (error) {
+                displayResult('auth-actions-results', 
+                    `Login test error: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+
+        async function testLogout() {
+            const resultsDiv = document.getElementById('auth-actions-results');
+            
+            try {
+                await authService.logout();
+                displayResult('auth-actions-results', 'Logout successful', 'success');
+                await checkAuthState();
+            } catch (error) {
+                displayResult('auth-actions-results', 
+                    `Logout error: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+
+        async function testTokenRefresh() {
+            const resultsDiv = document.getElementById('auth-actions-results');
+            
+            try {
+                if (authStateManager.isAuthenticated()) {
+                    const result = await authService.refreshToken();
+                    displayResult('auth-actions-results', 
+                        `Token refresh: ${result ? 'Success' : 'Failed'}`, 
+                        result ? 'success' : 'error'
+                    );
+                } else {
+                    displayResult('auth-actions-results', 
+                        'Cannot test token refresh - not authenticated', 
+                        'info'
+                    );
+                }
+            } catch (error) {
+                displayResult('auth-actions-results', 
+                    `Token refresh error: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+
+        async function testNavigation() {
+            const resultsDiv = document.getElementById('navigation-results');
+            resultsDiv.innerHTML = '';
+            
+            try {
+                // Test navigation state
+                const isAuth = authStateManager.isAuthenticated();
+                const user = authStateManager.getCurrentUser();
+                
+                displayResult('navigation-results', 
+                    `Navigation should show ${isAuth ? 'authenticated' : 'guest'} menu`, 
+                    'info'
+                );
+                
+                if (user) {
+                    displayResult('navigation-results', 
+                        `User role: ${authService.getRoleName(user.role)} - should show role-specific menu items`, 
+                        'info'
+                    );
+                }
+                
+                displayResult('navigation-results', 
+                    'Check the main page navigation to verify it matches the authentication state', 
+                    'success'
+                );
+                
+            } catch (error) {
+                displayResult('navigation-results', 
+                    `Navigation test error: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+
+        async function testEventListeners() {
+            const resultsDiv = document.getElementById('event-test-results');
+            resultsDiv.innerHTML = '';
+            
+            try {
+                let listenerCalled = false;
+                
+                // Add a test listener
+                const testListener = (isAuthenticated, user) => {
+                    listenerCalled = true;
+                    displayResult('event-test-results', 
+                        `Auth state listener called: ${isAuthenticated ? 'authenticated' : 'not authenticated'}`, 
+                        'success'
+                    );
+                };
+                
+                authStateManager.onAuthStateChange(testListener);
+                
+                displayResult('event-test-results', 
+                    'Test listener added - trigger login/logout to see if it fires', 
+                    'info'
+                );
+                
+                // Remove the test listener after a delay
+                setTimeout(() => {
+                    authStateManager.removeAuthStateListener(testListener);
+                    displayResult('event-test-results', 
+                        'Test listener removed', 
+                        'info'
+                    );
+                }, 5000);
+                
+            } catch (error) {
+                displayResult('event-test-results', 
+                    `Event listener test error: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', async () => {
+            const initialized = await initializeServices();
+            if (initialized) {
+                await checkAuthState();
+                displayResult('route-test-results', 'Services initialized - ready for testing', 'success');
+            } else {
+                displayResult('route-test-results', 'Failed to initialize services', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

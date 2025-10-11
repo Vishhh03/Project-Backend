@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Models;
+namespace FinalDestinationAPI.Models;
 
 public class Review
 {
@@ -13,3 +13,7 @@ public class Review
     public User User { get; set; } = null!;
     public Hotel Hotel { get; set; } = null!;
 }
+
+
+
+

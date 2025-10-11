@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Models;
+namespace FinalDestinationAPI.Models;
 
 public class Hotel
 {
@@ -18,3 +18,7 @@ public class Hotel
     public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
 }
+
+
+
+

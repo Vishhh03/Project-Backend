@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Interfaces;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Interfaces;
 using System.Security.Claims;
 
-namespace SimpleHotelAPI.Controllers;
+namespace FinalDestinationAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -245,3 +245,7 @@ public class ReviewsController : ControllerBase
         return userId;
     }
 }
+
+
+
+

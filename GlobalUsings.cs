@@ -1,4 +1,4 @@
-// Global using statements for the Simple Hotel System API
+// Global using statements for the FinalDestination API
 
 // System namespaces
 global using System.ComponentModel.DataAnnotations;
@@ -11,6 +11,10 @@ global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 
 // Project namespaces
-global using SimpleHotelAPI.Data;
-global using SimpleHotelAPI.Models;
-global using SimpleHotelAPI.Configuration;
+global using FinalDestinationAPI.Data;
+global using FinalDestinationAPI.Models;
+global using FinalDestinationAPI.Configuration;
+
+
+
+

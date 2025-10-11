@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using SimpleHotelAPI.Models;
-using SimpleHotelAPI.Services;
+using FinalDestinationAPI.Models;
+using FinalDestinationAPI.Services;
 
-namespace SimpleHotelAPI.Extensions;
+namespace FinalDestinationAPI.Extensions;
 
 /// <summary>
 /// Extension methods for validation and error handling
@@ -101,3 +101,7 @@ public static class ValidationExtensions
         return controller.Conflict(errorResponse);
     }
 }
+
+
+
+

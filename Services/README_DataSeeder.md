@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `DataSeeder` service provides comprehensive sample data for the Simple Hotel System API, making it easy for developers to test and explore the system's functionality without manually creating data.
+The `DataSeeder` service provides comprehensive sample data for the FinalDestination API, making it easy for developers to test and explore the system's functionality without manually creating data.
 
 ## Sample Data Included
 
@@ -120,3 +120,7 @@ The seeded data maintains proper relationships:
 - Payments link to bookings
 
 This comprehensive dataset allows developers to test all aspects of the hotel booking system without needing to manually create test data.
+
+
+
+

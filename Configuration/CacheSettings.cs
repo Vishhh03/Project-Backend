@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Configuration;
+namespace FinalDestinationAPI.Configuration;
 
 /// <summary>
 /// Cache configuration settings
@@ -10,3 +10,7 @@ public class CacheSettings
     public int DefaultExpirationMinutes { get; set; } = 30;
     public int HotelCacheExpirationMinutes { get; set; } = 10;
 }
+
+
+
+

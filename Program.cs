@@ -4,10 +4,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Reflection;
-using SimpleHotelAPI.Data;
-using SimpleHotelAPI.Services;
-using SimpleHotelAPI.Middleware;
-using SimpleHotelAPI.Filters;
+using FinalDestinationAPI.Data;
+using FinalDestinationAPI.Services;
+using FinalDestinationAPI.Middleware;
+using FinalDestinationAPI.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +23,7 @@ if (builder.Environment.IsDevelopment() && !builder.Configuration.GetValue<bool>
 {
     // Use In-Memory database for testing when LocalDB is not available
     builder.Services.AddDbContext<HotelContext>(options =>
-        options.UseInMemoryDatabase("SimpleHotelSystemDB"));
+        options.UseInMemoryDatabase("FinalDestinationDB"));
 }
 else
 {
@@ -59,12 +59,12 @@ builder.Services.AddMemoryCache();
 builder.Services.AddAutoMapper(typeof(Program));
 
 // Register application services
-builder.Services.AddScoped<SimpleHotelAPI.Interfaces.IJwtService, SimpleHotelAPI.Services.JwtService>();
-builder.Services.AddScoped<SimpleHotelAPI.Interfaces.ICacheService, SimpleHotelAPI.Services.CacheService>();
-builder.Services.AddScoped<SimpleHotelAPI.Interfaces.IPaymentService, SimpleHotelAPI.Services.MockPaymentService>();
-builder.Services.AddScoped<SimpleHotelAPI.Interfaces.IReviewService, SimpleHotelAPI.Services.ReviewService>();
-builder.Services.AddScoped<SimpleHotelAPI.Interfaces.ILoyaltyService, SimpleHotelAPI.Services.LoyaltyService>();
-builder.Services.AddScoped<SimpleHotelAPI.Services.IValidationService, SimpleHotelAPI.Services.ValidationService>();
+builder.Services.AddScoped<FinalDestinationAPI.Interfaces.IJwtService, FinalDestinationAPI.Services.JwtService>();
+builder.Services.AddScoped<FinalDestinationAPI.Interfaces.ICacheService, FinalDestinationAPI.Services.CacheService>();
+builder.Services.AddScoped<FinalDestinationAPI.Interfaces.IPaymentService, FinalDestinationAPI.Services.MockPaymentService>();
+builder.Services.AddScoped<FinalDestinationAPI.Interfaces.IReviewService, FinalDestinationAPI.Services.ReviewService>();
+builder.Services.AddScoped<FinalDestinationAPI.Interfaces.ILoyaltyService, FinalDestinationAPI.Services.LoyaltyService>();
+builder.Services.AddScoped<FinalDestinationAPI.Services.IValidationService, FinalDestinationAPI.Services.ValidationService>();
 
 // Swagger Configuration with JWT Authentication
 builder.Services.AddEndpointsApiExplorer();
@@ -72,13 +72,13 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Simple Hotel System API",
+        Title = "FinalDestination API",
         Version = "v1",
-        Description = "A learning-focused hotel booking API with JWT authentication",
+        Description = "A comprehensive hotel booking API with JWT authentication",
         Contact = new OpenApiContact
         {
-            Name = "Simple Hotel System",
-            Email = "support@simplehotel.com"
+            Name = "FinalDestination",
+            Email = "support@finaldestination.com"
         }
     });
 
@@ -137,9 +137,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Simple Hotel System API v1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "FinalDestination API v1");
         c.RoutePrefix = string.Empty; // Makes Swagger UI the default page
-        c.DocumentTitle = "Simple Hotel System API";
+        c.DocumentTitle = "FinalDestination API";
         c.DefaultModelsExpandDepth(-1); // Hide schemas section by default
     });
 }
@@ -179,3 +179,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+
+
+

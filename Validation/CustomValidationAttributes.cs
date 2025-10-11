@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using SimpleHotelAPI.DTOs;
+using FinalDestinationAPI.DTOs;
 
-namespace SimpleHotelAPI.Validation;
+namespace FinalDestinationAPI.Validation;
 
 /// <summary>
 /// Validates that a date is not in the past
@@ -195,3 +195,7 @@ public class ExpiryDateAttribute : ValidationAttribute
         return ValidationResult.Success;
     }
 }
+
+
+
+

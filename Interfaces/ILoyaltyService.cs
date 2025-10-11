@@ -1,7 +1,7 @@
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Interfaces;
+namespace FinalDestinationAPI.Interfaces;
 
 public interface ILoyaltyService
 {
@@ -12,3 +12,7 @@ public interface ILoyaltyService
     Task<int> CalculatePointsAsync(decimal bookingAmount);
     Task<bool> HasLoyaltyAccountAsync(int userId);
 }
+
+
+
+

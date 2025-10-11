@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Models;
+namespace FinalDestinationAPI.Models;
 
 /// <summary>
 /// Standard error response format for the API
@@ -30,3 +30,7 @@ public class ErrorResponse
     /// </summary>
     public Dictionary<string, string[]>? ValidationErrors { get; set; }
 }
+
+
+
+

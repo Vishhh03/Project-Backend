@@ -1,7 +1,7 @@
 using System.Security.Claims;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Interfaces;
+namespace FinalDestinationAPI.Interfaces;
 
 /// <summary>
 /// Service for JWT token management including generation and validation
@@ -36,3 +36,7 @@ public interface IJwtService
     /// <returns>User role if valid, null if invalid</returns>
     string? GetUserRoleFromToken(string token);
 }
+
+
+
+

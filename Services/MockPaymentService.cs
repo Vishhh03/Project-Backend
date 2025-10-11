@@ -1,10 +1,10 @@
-using SimpleHotelAPI.Data;
-using SimpleHotelAPI.Interfaces;
-using SimpleHotelAPI.Models;
-using SimpleHotelAPI.DTOs;
+using FinalDestinationAPI.Data;
+using FinalDestinationAPI.Interfaces;
+using FinalDestinationAPI.Models;
+using FinalDestinationAPI.DTOs;
 using Microsoft.EntityFrameworkCore;
 
-namespace SimpleHotelAPI.Services;
+namespace FinalDestinationAPI.Services;
 
 public class MockPaymentService : IPaymentService
 {
@@ -141,3 +141,7 @@ public class MockPaymentService : IPaymentService
             .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 }
+
+
+
+

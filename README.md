@@ -1,6 +1,6 @@
-# Simple Hotel System API
+# FinalDestination API
 
-A comprehensive learning-focused ASP.NET Core 8 Web API for hotel booking management with JWT authentication, designed for developers new to .NET. This system provides a complete hotel booking workflow with authentication, payment processing, reviews, and loyalty rewards.
+A comprehensive luxury hotel booking management system built with ASP.NET Core 8 Web API and JWT authentication. FinalDestination provides an elegant and complete hotel booking experience with advanced features for authentication, payment processing, reviews, and loyalty rewards.
 
 ## 🚀 Features
 
@@ -40,7 +40,7 @@ A comprehensive learning-focused ASP.NET Core 8 Web API for hotel booking manage
 
 ```bash
 git clone <repository-url>
-cd SimpleHotelAPI
+cd FinalDestinationAPI
 ```
 
 ### 2. Restore Dependencies
@@ -77,7 +77,7 @@ dotnet run
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SimpleHotelSystemDB;Trusted_Connection=true;MultipleActiveResultSets=true"
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=FinalDestinationDB;Trusted_Connection=true;MultipleActiveResultSets=true"
   }
 }
 ```
@@ -88,8 +88,8 @@ dotnet run
 {
   "Jwt": {
     "Key": "YourSuperSecretKeyThatIsAtLeast32CharactersLongForJWTTokenGeneration!",
-    "Issuer": "SimpleHotelSystem",
-    "Audience": "SimpleHotelSystemUsers",
+    "Issuer": "FinalDestination",
+    "Audience": "FinalDestinationUsers",
     "ExpiryInHours": 24
   }
 }
@@ -131,7 +131,7 @@ dotnet run
 ## 📁 Project Structure
 
 ```
-SimpleHotelAPI/
+FinalDestinationAPI/
 ├── 📁 Configuration/          # Configuration classes and settings
 │   ├── CacheSettings.cs
 │   ├── JwtSettings.cs
@@ -349,8 +349,8 @@ The API uses **JWT Bearer token authentication** with role-based authorization:
   "name": "John Doe",
   "role": "Guest",
   "exp": 1640995200,
-  "iss": "SimpleHotelSystem",
-  "aud": "SimpleHotelSystemUsers"
+  "iss": "FinalDestination",
+  "aud": "FinalDestinationUsers"
 }
 ```
 
@@ -564,4 +564,8 @@ This project is designed for educational purposes and learning ASP.NET Core deve
 
 ---
 
-**Happy Learning! 🚀** This Simple Hotel System API provides a solid foundation for understanding ASP.NET Core concepts. Use the comprehensive documentation to guide your learning journey and build upon this foundation to create more advanced applications.
+**Happy Learning! 🚀** This FinalDestination API provides a solid foundation for understanding ASP.NET Core concepts. Use the comprehensive documentation to guide your learning journey and build upon this foundation to create more advanced applications.
+
+
+
+

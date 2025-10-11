@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using SimpleHotelAPI.Validation;
+using FinalDestinationAPI.Validation;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 /// <summary>
 /// Request DTO for creating a new booking with comprehensive validation
@@ -53,3 +53,7 @@ public class CreateBookingRequest
     [Range(1, 10, ErrorMessage = "Number of guests must be between 1 and 10")]
     public int NumberOfGuests { get; set; } = 1;
 }
+
+
+
+

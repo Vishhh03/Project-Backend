@@ -1,6 +1,6 @@
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 public class PaymentResult
 {
@@ -12,3 +12,7 @@ public class PaymentResult
     public string? ErrorMessage { get; set; }
     public DateTime ProcessedAt { get; set; } = DateTime.UtcNow;
 }
+
+
+
+

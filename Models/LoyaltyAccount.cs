@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Models;
+namespace FinalDestinationAPI.Models;
 
 public class LoyaltyAccount
 {
@@ -26,3 +26,7 @@ public class PointsTransaction
     public LoyaltyAccount LoyaltyAccount { get; set; } = null!;
     public Booking? Booking { get; set; }
 }
+
+
+
+

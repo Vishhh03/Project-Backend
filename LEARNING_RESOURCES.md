@@ -1,4 +1,4 @@
-# Simple Hotel System API - Learning Resources & Next Steps
+# FinalDestination API - Learning Resources & Next Steps
 
 ## Table of Contents
 - [Core Concepts Demonstrated](#core-concepts-demonstrated)
@@ -11,7 +11,7 @@
 
 ## Core Concepts Demonstrated
 
-This Simple Hotel System API demonstrates essential ASP.NET Core concepts that every .NET developer should understand:
+This FinalDestination API demonstrates essential ASP.NET Core concepts that every .NET developer should understand:
 
 ### 🏗️ Architecture & Design Patterns
 
@@ -430,7 +430,7 @@ This Simple Hotel System API demonstrates essential ASP.NET Core concepts that e
 
 ## Conclusion
 
-This Simple Hotel System API provides a solid foundation for learning ASP.NET Core development. By understanding the concepts demonstrated here and following the suggested learning path, you'll be well-prepared for more advanced topics and real-world development challenges.
+This FinalDestination API provides a solid foundation for learning ASP.NET Core development. By understanding the concepts demonstrated here and following the suggested learning path, you'll be well-prepared for more advanced topics and real-world development challenges.
 
 Remember:
 - **Practice regularly** with hands-on coding
@@ -440,3 +440,7 @@ Remember:
 - **Focus on fundamentals** before moving to advanced topics
 
 The journey from beginner to expert developer is continuous. Use this project as a stepping stone to build more complex and sophisticated applications. Good luck with your .NET development journey!
+
+
+
+

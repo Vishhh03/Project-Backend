@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Models;
+namespace FinalDestinationAPI.Models;
 
 public class User
 {
@@ -24,3 +24,7 @@ public enum UserRole
     HotelManager = 2,
     Admin = 3
 }
+
+
+
+

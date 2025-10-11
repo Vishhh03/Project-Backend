@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 public class LoyaltyAccountResponse
 {
@@ -30,3 +30,7 @@ public class AwardPointsRequest
     public int BookingId { get; set; }
     public decimal BookingAmount { get; set; }
 }
+
+
+
+

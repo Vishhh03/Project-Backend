@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Models;
+namespace FinalDestinationAPI.Models;
 
 public class Booking
 {
@@ -25,3 +25,7 @@ public enum BookingStatus
     Cancelled = 2,
     Completed = 3
 }
+
+
+
+

@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SimpleHotelAPI.Data;
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Interfaces;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Data;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Interfaces;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Controllers;
+namespace FinalDestinationAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -349,3 +349,7 @@ public class HotelsController : ControllerBase
         return await _context.Hotels.AnyAsync(e => e.Id == id);
     }
 }
+
+
+
+

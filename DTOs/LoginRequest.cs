@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 /// <summary>
 /// Request DTO for user login
@@ -20,3 +20,7 @@ public class LoginRequest
     [Required(ErrorMessage = "Password is required")]
     public string Password { get; set; } = string.Empty;
 }
+
+
+
+

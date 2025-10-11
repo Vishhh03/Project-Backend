@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using SimpleHotelAPI.Data;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Data;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Services;
+namespace FinalDestinationAPI.Services;
 
 public static class DataSeeder
 {
@@ -738,3 +738,7 @@ public static class DataSeeder
         await context.SaveChangesAsync();
     }
 }
+
+
+
+

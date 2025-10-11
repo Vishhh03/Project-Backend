@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Interfaces;
+namespace FinalDestinationAPI.Interfaces;
 
 /// <summary>
 /// Interface for caching operations with configurable expiration and pattern-based removal
@@ -41,3 +41,7 @@ public interface ICacheService
     /// <returns>True if key exists, false otherwise</returns>
     Task<bool> ExistsAsync(string key);
 }
+
+
+
+

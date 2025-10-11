@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth State Management Verification</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .test-output {
+            background: #000;
+            color: #0f0;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            max-height: 500px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .run-button {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .run-button:hover {
+            background: #0056b3;
+        }
+        .status {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Authentication State Management Verification</h1>
+        
+        <div class="status" id="status">Ready to run tests</div>
+        
+        <button class="run-button" onclick="runVerification()">Run Verification Tests</button>
+        
+        <div class="test-output" id="output">
+Click "Run Verification Tests" to start testing the authentication state management implementation.
+
+This will test:
+- Service initialization
+- Protected route configuration
+- Route access control
+- Authentication state listeners
+- User role-based access
+- Event handling
+        </div>
+    </div>
+
+    <!-- Include required scripts -->
+    <script src="js/utils/api-client.js"></script>
+    <script src="js/utils/storage-service.js"></script>
+    <script src="js/utils/router.js"></script>
+    <script src="js/services/auth-service.js"></script>
+    <script src="js/utils/auth-state-manager.js"></script>
+    <script src="verify-auth-state.js"></script>
+
+    <script>
+        const outputDiv = document.getElementById('output');
+        const statusDiv = document.getElementById('status');
+        
+        // Capture console output
+        const originalLog = console.log;
+        const originalError = console.error;
+        
+        function captureOutput() {
+            console.log = function(...args) {
+                const message = args.join(' ');
+                outputDiv.textContent += message + '\n';
+                outputDiv.scrollTop = outputDiv.scrollHeight;
+                originalLog.apply(console, args);
+            };
+            
+            console.error = function(...args) {
+                const message = args.join(' ');
+                outputDiv.textContent += 'ERROR: ' + message + '\n';
+                outputDiv.scrollTop = outputDiv.scrollHeight;
+                originalError.apply(console, args);
+            };
+        }
+        
+        function restoreOutput() {
+            console.log = originalLog;
+            console.error = originalError;
+        }
+        
+        async function runVerification() {
+            statusDiv.textContent = 'Running tests...';
+            statusDiv.className = 'status info';
+            outputDiv.textContent = 'Starting verification tests...\n\n';
+            
+            captureOutput();
+            
+            try {
+                const success = await runAuthStateTests();
+                
+                if (success) {
+                    statusDiv.textContent = 'All tests passed! ✓';
+                    statusDiv.className = 'status success';
+                } else {
+                    statusDiv.textContent = 'Some tests failed! ✗';
+                    statusDiv.className = 'status error';
+                }
+            } catch (error) {
+                statusDiv.textContent = 'Test execution failed! ✗';
+                statusDiv.className = 'status error';
+                outputDiv.textContent += `\nFATAL ERROR: ${error.message}\n`;
+            } finally {
+                restoreOutput();
+            }
+        }
+        
+        // Auto-run tests when page loads (optional)
+        // window.addEventListener('load', () => {
+        //     setTimeout(runVerification, 1000);
+        // });
+    </script>
+</body>
+</html>

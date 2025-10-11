@@ -1,0 +1,345 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\assets\\icons\\favicon.ico",
+      "PackagePath": "staticwebassets\\assets\\icons\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\assets\\icons\\logo.svg",
+      "PackagePath": "staticwebassets\\assets\\icons\\logo.svg"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\assets\\images\\hotel-placeholder.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\hotel-placeholder.jpg"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\assets\\images\\placeholder.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\placeholder.jpg"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\auth-state-test.html",
+      "PackagePath": "staticwebassets\\auth-state-test.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\auth-test.html",
+      "PackagePath": "staticwebassets\\auth-test.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\css\\accessibility.css",
+      "PackagePath": "staticwebassets\\css\\accessibility.css"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\css\\components.css",
+      "PackagePath": "staticwebassets\\css\\components.css"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\css\\main.css",
+      "PackagePath": "staticwebassets\\css\\main.css"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\css\\performance.css",
+      "PackagePath": "staticwebassets\\css\\performance.css"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\css\\responsive.css",
+      "PackagePath": "staticwebassets\\css\\responsive.css"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\README.md",
+      "PackagePath": "staticwebassets\\js\\components\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\admin\\admin-dashboard-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\admin\\admin-dashboard-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\admin\\hotel-management-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\admin\\hotel-management-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\auth\\login-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\auth\\login-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\auth\\register-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\auth\\register-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\bookings\\booking-detail-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\bookings\\booking-detail-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\bookings\\booking-form-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\bookings\\booking-form-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\bookings\\booking-list-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\bookings\\booking-list-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\bookings\\enhanced-booking-form-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\bookings\\enhanced-booking-form-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\hotels\\hotel-detail-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\hotels\\hotel-detail-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\hotels\\hotel-list-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\hotels\\hotel-list-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\hotels\\hotel-search-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\hotels\\hotel-search-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\loyalty\\loyalty-dashboard-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\loyalty\\loyalty-dashboard-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\loyalty\\loyalty-notification-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\loyalty\\loyalty-notification-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\loyalty\\loyalty-points-widget.js",
+      "PackagePath": "staticwebassets\\js\\components\\loyalty\\loyalty-points-widget.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\payments\\payment-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\payments\\payment-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\payments\\payment-confirmation-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\payments\\payment-confirmation-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\payments\\payment-history-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\payments\\payment-history-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\reviews\\review-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\reviews\\review-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\reviews\\review-form-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\reviews\\review-form-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\components\\reviews\\review-list-component.js",
+      "PackagePath": "staticwebassets\\js\\components\\reviews\\review-list-component.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\config\\api-config.js",
+      "PackagePath": "staticwebassets\\js\\config\\api-config.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\config\\app-config.js",
+      "PackagePath": "staticwebassets\\js\\config\\app-config.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\config\\build-config.js",
+      "PackagePath": "staticwebassets\\js\\config\\build-config.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\config\\production-config.js",
+      "PackagePath": "staticwebassets\\js\\config\\production-config.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\models\\README.md",
+      "PackagePath": "staticwebassets\\js\\models\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\models\\booking.js",
+      "PackagePath": "staticwebassets\\js\\models\\booking.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\models\\hotel.js",
+      "PackagePath": "staticwebassets\\js\\models\\hotel.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\models\\loyalty.js",
+      "PackagePath": "staticwebassets\\js\\models\\loyalty.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\models\\payment.js",
+      "PackagePath": "staticwebassets\\js\\models\\payment.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\models\\review.js",
+      "PackagePath": "staticwebassets\\js\\models\\review.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\README.md",
+      "PackagePath": "staticwebassets\\js\\services\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\admin-service.js",
+      "PackagePath": "staticwebassets\\js\\services\\admin-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\auth-service.js",
+      "PackagePath": "staticwebassets\\js\\services\\auth-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\booking-service.js",
+      "PackagePath": "staticwebassets\\js\\services\\booking-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\hotel-service.js",
+      "PackagePath": "staticwebassets\\js\\services\\hotel-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\loyalty-service.js",
+      "PackagePath": "staticwebassets\\js\\services\\loyalty-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\notification-service.js",
+      "PackagePath": "staticwebassets\\js\\services\\notification-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\payment-service.js",
+      "PackagePath": "staticwebassets\\js\\services\\payment-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\services\\review-service.js",
+      "PackagePath": "staticwebassets\\js\\services\\review-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\README.md",
+      "PackagePath": "staticwebassets\\js\\utils\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\accessibility-manager.js",
+      "PackagePath": "staticwebassets\\js\\utils\\accessibility-manager.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\api-client.js",
+      "PackagePath": "staticwebassets\\js\\utils\\api-client.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\app-lifecycle.js",
+      "PackagePath": "staticwebassets\\js\\utils\\app-lifecycle.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\auth-state-manager.js",
+      "PackagePath": "staticwebassets\\js\\utils\\auth-state-manager.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\browser-compatibility.js",
+      "PackagePath": "staticwebassets\\js\\utils\\browser-compatibility.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\bundle-optimizer.js",
+      "PackagePath": "staticwebassets\\js\\utils\\bundle-optimizer.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\component-integration.js",
+      "PackagePath": "staticwebassets\\js\\utils\\component-integration.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\error-handler.js",
+      "PackagePath": "staticwebassets\\js\\utils\\error-handler.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\event-bus.js",
+      "PackagePath": "staticwebassets\\js\\utils\\event-bus.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\loyalty-integration.js",
+      "PackagePath": "staticwebassets\\js\\utils\\loyalty-integration.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\offline-manager.js",
+      "PackagePath": "staticwebassets\\js\\utils\\offline-manager.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\performance-manager.js",
+      "PackagePath": "staticwebassets\\js\\utils\\performance-manager.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\router-documentation.md",
+      "PackagePath": "staticwebassets\\js\\utils\\router-documentation.md"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\router-verification.js",
+      "PackagePath": "staticwebassets\\js\\utils\\router-verification.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\router.js",
+      "PackagePath": "staticwebassets\\js\\utils\\router.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\state-manager.js",
+      "PackagePath": "staticwebassets\\js\\utils\\state-manager.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\storage-service.js",
+      "PackagePath": "staticwebassets\\js\\utils\\storage-service.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\js\\utils\\validator.js",
+      "PackagePath": "staticwebassets\\js\\utils\\validator.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\offline.html",
+      "PackagePath": "staticwebassets\\offline.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\router-test.html",
+      "PackagePath": "staticwebassets\\router-test.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\storage-test.html",
+      "PackagePath": "staticwebassets\\storage-test.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\sw.js",
+      "PackagePath": "staticwebassets\\sw.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\test-auth-state-implementation.html",
+      "PackagePath": "staticwebassets\\test-auth-state-implementation.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\test-error-handling.html",
+      "PackagePath": "staticwebassets\\test-error-handling.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\verify-auth-state.html",
+      "PackagePath": "staticwebassets\\verify-auth-state.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\wwwroot\\verify-auth-state.js",
+      "PackagePath": "staticwebassets\\verify-auth-state.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.FinalDestinationAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.FinalDestinationAPI.props",
+      "PackagePath": "build\\FinalDestinationAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.FinalDestinationAPI.props",
+      "PackagePath": "buildMultiTargeting\\FinalDestinationAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.FinalDestinationAPI.props",
+      "PackagePath": "buildTransitive\\FinalDestinationAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
+
+
+
+

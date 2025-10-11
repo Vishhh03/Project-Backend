@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 public class UpdateReviewRequest
 {
@@ -10,3 +10,7 @@ public class UpdateReviewRequest
     [MaxLength(1000, ErrorMessage = "Comment cannot exceed 1000 characters")]
     public string Comment { get; set; } = string.Empty;
 }
+
+
+
+

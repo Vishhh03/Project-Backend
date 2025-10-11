@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 public class ReviewResponse
 {
@@ -11,3 +11,7 @@ public class ReviewResponse
     public string Comment { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
 }
+
+
+
+

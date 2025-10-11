@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Data;
+namespace FinalDestinationAPI.Data;
 
 public class HotelContext : DbContext
 {
@@ -116,3 +116,7 @@ public class HotelContext : DbContext
         // This allows for more comprehensive and realistic test data
     }
 }
+
+
+
+

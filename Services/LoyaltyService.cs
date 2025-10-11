@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using SimpleHotelAPI.Data;
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Interfaces;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Data;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Interfaces;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Services;
+namespace FinalDestinationAPI.Services;
 
 public class LoyaltyService : ILoyaltyService
 {
@@ -182,3 +182,7 @@ public class LoyaltyService : ILoyaltyService
             .AnyAsync(la => la.UserId == userId);
     }
 }
+
+
+
+

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 /// <summary>
 /// Request DTO for creating a new hotel with comprehensive validation
@@ -34,3 +34,7 @@ public class CreateHotelRequest
     [Range(1, int.MaxValue, ErrorMessage = "Manager ID must be a positive number")]
     public int? ManagerId { get; set; }
 }
+
+
+
+

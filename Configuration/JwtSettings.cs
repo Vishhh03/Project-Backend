@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Configuration;
+namespace FinalDestinationAPI.Configuration;
 
 /// <summary>
 /// JWT configuration settings
@@ -12,3 +12,7 @@ public class JwtSettings
     public string Audience { get; set; } = string.Empty;
     public int ExpiryInHours { get; set; } = 24;
 }
+
+
+
+

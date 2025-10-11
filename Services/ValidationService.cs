@@ -1,9 +1,9 @@
-using SimpleHotelAPI.Data;
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Data;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace SimpleHotelAPI.Services;
+namespace FinalDestinationAPI.Services;
 
 /// <summary>
 /// Service for handling complex business rule validation
@@ -218,3 +218,7 @@ public class ValidationResult
     public bool IsValid { get; set; }
     public List<string> Errors { get; set; } = new();
 }
+
+
+
+

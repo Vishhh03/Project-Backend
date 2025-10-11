@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\SimpleHotelAPI\\SimpleHotelAPI.csproj": {}
+    "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\FinalDestinationAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\SimpleHotelAPI\\SimpleHotelAPI.csproj": {
+    "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\FinalDestinationAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\SimpleHotelAPI\\SimpleHotelAPI.csproj",
-        "projectName": "SimpleHotelAPI",
-        "projectPath": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\SimpleHotelAPI\\SimpleHotelAPI.csproj",
+        "projectUniqueName": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\FinalDestinationAPI.csproj",
+        "projectName": "FinalDestinationAPI",
+        "projectPath": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\FinalDestinationAPI.csproj",
         "packagesPath": "C:\\Users\\visha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\SimpleHotelAPI\\obj\\",
+        "outputPath": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\FinalDestinationAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\visha\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -109,3 +109,7 @@
     }
   }
 }
+
+
+
+

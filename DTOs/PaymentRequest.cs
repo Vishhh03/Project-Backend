@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using SimpleHotelAPI.Models;
-using SimpleHotelAPI.Validation;
+using FinalDestinationAPI.Models;
+using FinalDestinationAPI.Validation;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 /// <summary>
 /// Request DTO for processing payments with comprehensive validation
@@ -69,3 +69,7 @@ public class PaymentRequest
     [RegularExpression(@"^\d{3,4}$", ErrorMessage = "CVV must be 3 or 4 digits")]
     public string? CVV { get; set; }
 }
+
+
+
+

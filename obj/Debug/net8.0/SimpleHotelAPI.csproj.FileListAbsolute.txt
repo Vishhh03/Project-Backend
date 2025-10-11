@@ -142,3 +142,4 @@ C:\Users\visha\Desktop\CTS\Hotel-Booking-Management\SimpleHotelAPI\obj\Debug\net
 C:\Users\visha\Desktop\CTS\Hotel-Booking-Management\SimpleHotelAPI\obj\Debug\net8.0\SimpleHotelAPI.genruntimeconfig.cache
 C:\Users\visha\Desktop\CTS\Hotel-Booking-Management\SimpleHotelAPI\obj\Debug\net8.0\ref\SimpleHotelAPI.dll
 C:\Users\visha\Desktop\CTS\Hotel-Booking-Management\SimpleHotelAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\visha\Desktop\CTS\Hotel-Booking-Management\SimpleHotelAPI\bin\Debug\net8.0\SimpleHotelAPI.staticwebassets.runtime.json

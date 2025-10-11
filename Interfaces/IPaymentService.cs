@@ -1,7 +1,7 @@
-using SimpleHotelAPI.Models;
-using SimpleHotelAPI.DTOs;
+using FinalDestinationAPI.Models;
+using FinalDestinationAPI.DTOs;
 
-namespace SimpleHotelAPI.Interfaces;
+namespace FinalDestinationAPI.Interfaces;
 
 public interface IPaymentService
 {
@@ -9,3 +9,7 @@ public interface IPaymentService
     Task<PaymentResult> RefundPaymentAsync(int paymentId, decimal amount);
     Task<Payment?> GetPaymentAsync(int paymentId);
 }
+
+
+
+

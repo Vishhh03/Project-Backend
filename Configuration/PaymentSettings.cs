@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Configuration;
+namespace FinalDestinationAPI.Configuration;
 
 /// <summary>
 /// Payment service configuration settings
@@ -10,3 +10,7 @@ public class PaymentSettings
     public double MockSuccessRate { get; set; } = 0.9;
     public int ProcessingDelayMs { get; set; } = 1000;
 }
+
+
+
+

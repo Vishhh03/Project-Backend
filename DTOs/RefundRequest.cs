@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 public class RefundRequest
 {
@@ -11,3 +11,7 @@ public class RefundRequest
     [StringLength(500, ErrorMessage = "Reason cannot exceed 500 characters")]
     public string? Reason { get; set; }
 }
+
+
+
+

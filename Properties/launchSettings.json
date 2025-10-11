@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SimpleHotelAPI": {
+    "FinalDestinationAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
@@ -11,3 +11,7 @@
     }
   }
 }
+
+
+
+

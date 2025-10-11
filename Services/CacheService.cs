@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Caching.Memory;
-using SimpleHotelAPI.Interfaces;
+using FinalDestinationAPI.Interfaces;
 using System.Collections.Concurrent;
 using System.Text.RegularExpressions;
 
-namespace SimpleHotelAPI.Services;
+namespace FinalDestinationAPI.Services;
 
 /// <summary>
 /// Memory cache service implementation with configurable expiration and pattern-based removal
@@ -157,3 +157,7 @@ public class CacheService : ICacheService
         return Task.FromResult(exists);
     }
 }
+
+
+
+

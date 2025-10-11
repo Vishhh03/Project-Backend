@@ -1,8 +1,8 @@
 using System.Net;
 using System.Text.Json;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Middleware;
+namespace FinalDestinationAPI.Middleware;
 
 /// <summary>
 /// Global error handling middleware for consistent error responses
@@ -97,3 +97,7 @@ public class ErrorHandlingMiddleware
         await response.WriteAsync(jsonResponse);
     }
 }
+
+
+
+

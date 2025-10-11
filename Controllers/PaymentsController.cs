@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Interfaces;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Interfaces;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Controllers;
+namespace FinalDestinationAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -124,3 +124,7 @@ public class PaymentsController : ControllerBase
         }
     }
 }
+
+
+
+

@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SimpleHotelAPI.Data;
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Interfaces;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Data;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Interfaces;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Controllers;
+namespace FinalDestinationAPI.Controllers;
 
 /// <summary>
 /// Controller for user authentication operations
@@ -292,3 +292,7 @@ public class AuthController : ControllerBase
         return userInfo;
     }
 }
+
+
+
+

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling & Validation Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Error Handling & Validation Test Page</h1>
+    
+    <div class="test-section">
+        <h2>Notification System Test</h2>
+        <button class="test-button" onclick="testNotifications()">Test Success Notification</button>
+        <button class="test-button" onclick="testErrorNotification()">Test Error Notification</button>
+        <button class="test-button" onclick="testWarningNotification()">Test Warning Notification</button>
+        <button class="test-button" onclick="testInfoNotification()">Test Info Notification</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Error Handling Test</h2>
+        <button class="test-button" onclick="testApiError()">Test API Error</button>
+        <button class="test-button" onclick="testNetworkError()">Test Network Error</button>
+        <button class="test-button" onclick="testValidationError()">Test Validation Error</button>
+        <button class="test-button" onclick="testGenericError()">Test Generic Error</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Offline Detection Test</h2>
+        <button class="test-button" onclick="testOfflineFeature()">Test Offline Feature Check</button>
+        <button class="test-button" onclick="simulateOffline()">Simulate Offline</button>
+        <button class="test-button" onclick="simulateOnline()">Simulate Online</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Form Validation Test</h2>
+        <form id="test-form">
+            <div class="form-group">
+                <label for="email">Email (required):</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password (required, strong):</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <button type="submit" class="test-button">Validate Form</button>
+        </form>
+    </div>
+
+    <!-- Include the error handling and validation scripts -->
+    <script src="js/utils/error-handler.js"></script>
+    <script src="js/utils/offline-manager.js"></script>
+    <script src="js/services/notification-service.js"></script>
+    <script src="js/utils/validator.js"></script>
+
+    <script>
+        // Test functions
+        function testNotifications() {
+            window.notificationService.success('This is a success message!');
+        }
+
+        function testErrorNotification() {
+            window.notificationService.error('This is an error message!', {
+                persistent: true,
+                actions: [
+                    {
+                        text: 'Retry',
+                        primary: true,
+                        handler: () => alert('Retry clicked!')
+                    }
+                ]
+            });
+        }
+
+        function testWarningNotification() {
+            window.notificationService.warning('This is a warning message!');
+        }
+
+        function testInfoNotification() {
+            window.notificationService.info('This is an info message!');
+        }
+
+        function testApiError() {
+            const error = new ApiError('Server error occurred', 500, { details: 'Internal server error' });
+            window.errorHandler.handleError(error);
+        }
+
+        function testNetworkError() {
+            const error = new NetworkError('Connection failed');
+            window.errorHandler.handleError(error);
+        }
+
+        function testValidationError() {
+            const error = new ValidationError('email', 'Invalid email format', 'invalid-email');
+            window.errorHandler.handleError(error);
+        }
+
+        function testGenericError() {
+            const error = new Error('Something went wrong');
+            window.errorHandler.handleError(error);
+        }
+
+        function testOfflineFeature() {
+            const isAvailable = window.offlineManager.isFeatureAvailable('createBooking');
+            const message = isAvailable ? 
+                'Booking creation is available' : 
+                window.offlineManager.getOfflineMessage('createBooking');
+            
+            window.notificationService.info(message);
+        }
+
+        function simulateOffline() {
+            // Simulate offline event
+            window.dispatchEvent(new Event('offline'));
+        }
+
+        function simulateOnline() {
+            // Simulate online event
+            window.dispatchEvent(new Event('online'));
+        }
+
+        // Initialize form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const validationSchema = {
+                email: ['required', 'email'],
+                password: ['required', 'strongPassword'],
+                confirmPassword: ['required', { name: 'confirmPassword', passwordField: 'password' }],
+                phone: ['phone']
+            };
+
+            const formValidator = new FormValidator('#test-form', validationSchema);
+
+            // Handle successful validation
+            document.getElementById('test-form').addEventListener('validationSuccess', function(event) {
+                window.notificationService.success('Form validation passed!');
+                console.log('Form data:', event.detail.formData);
+            });
+
+            // Handle validation errors
+            document.getElementById('test-form').addEventListener('validationError', function(event) {
+                window.notificationService.error('Form validation failed. Please check the errors.');
+                console.log('Validation errors:', event.detail.errors);
+            });
+        });
+    </script>
+</body>
+</html>

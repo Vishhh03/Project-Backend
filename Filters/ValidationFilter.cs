@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Filters;
+namespace FinalDestinationAPI.Filters;
 
 /// <summary>
 /// Action filter to handle model validation errors consistently
@@ -32,3 +32,7 @@ public class ValidationFilter : ActionFilterAttribute
         }
     }
 }
+
+
+
+

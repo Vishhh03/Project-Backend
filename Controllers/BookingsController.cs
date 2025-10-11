@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SimpleHotelAPI.Data;
-using SimpleHotelAPI.Models;
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Interfaces;
-using SimpleHotelAPI.Services;
-using SimpleHotelAPI.Extensions;
+using FinalDestinationAPI.Data;
+using FinalDestinationAPI.Models;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Interfaces;
+using FinalDestinationAPI.Services;
+using FinalDestinationAPI.Extensions;
 using System.Security.Claims;
 
-namespace SimpleHotelAPI.Controllers;
+namespace FinalDestinationAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -429,3 +429,7 @@ public class BookingsController : ControllerBase
 
     #endregion
 }
+
+
+
+

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 /// <summary>
 /// Request DTO for creating or updating a hotel review with comprehensive validation
@@ -29,3 +29,7 @@ public class ReviewRequest
         ErrorMessage = "Comment contains invalid characters. Only letters, numbers, spaces, and common punctuation are allowed")]
     public string Comment { get; set; } = string.Empty;
 }
+
+
+
+

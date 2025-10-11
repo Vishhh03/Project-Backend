@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Models;
+namespace FinalDestinationAPI.Models;
 
 public class Payment
 {
@@ -31,3 +31,7 @@ public enum PaymentStatus
     Failed = 3,
     Refunded = 4
 }
+
+
+
+

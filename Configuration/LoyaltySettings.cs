@@ -1,4 +1,4 @@
-namespace SimpleHotelAPI.Configuration;
+namespace FinalDestinationAPI.Configuration;
 
 /// <summary>
 /// Loyalty program configuration settings
@@ -10,3 +10,7 @@ public class LoyaltySettings
     public double PointsPercentage { get; set; } = 0.1;
     public decimal MinimumBookingAmount { get; set; } = 50.0m;
 }
+
+
+
+

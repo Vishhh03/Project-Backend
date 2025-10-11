@@ -1,6 +1,6 @@
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.DTOs;
+namespace FinalDestinationAPI.DTOs;
 
 /// <summary>
 /// Response DTO for authentication operations (login/register)
@@ -94,3 +94,7 @@ public class LoyaltyInfo
     /// </summary>
     public DateTime LastUpdated { get; set; }
 }
+
+
+
+

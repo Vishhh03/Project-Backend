@@ -1,4 +1,4 @@
-# Simple Hotel System API - Complete Setup Guide
+# FinalDestination API - Complete Setup Guide
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -69,14 +69,14 @@
 1. **Clone the Repository**
    ```bash
    git clone <repository-url>
-   cd SimpleHotelAPI
+   cd FinalDestinationAPI
    ```
 
 2. **Open in Visual Studio**
    - Open Visual Studio 2022
    - Click "Open a project or solution"
    - Navigate to the cloned folder
-   - Select `SimpleHotelAPI.sln` or `SimpleHotelAPI.csproj`
+   - Select `FinalDestinationAPI.sln` or `FinalDestinationAPI.csproj`
 
 3. **Restore NuGet Packages**
    - Visual Studio will automatically restore packages
@@ -91,7 +91,7 @@
 1. **Clone the Repository**
    ```bash
    git clone <repository-url>
-   cd SimpleHotelAPI
+   cd FinalDestinationAPI
    ```
 
 2. **Open in VS Code**
@@ -118,7 +118,7 @@
 1. **Clone and Navigate**
    ```bash
    git clone <repository-url>
-   cd SimpleHotelAPI
+   cd FinalDestinationAPI
    ```
 
 2. **Restore and Build**
@@ -147,7 +147,7 @@
      ```json
      {
        "ConnectionStrings": {
-         "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SimpleHotelSystemDB;Trusted_Connection=true;MultipleActiveResultSets=true"
+         "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=FinalDestinationDB;Trusted_Connection=true;MultipleActiveResultSets=true"
        }
      }
      ```
@@ -181,7 +181,7 @@
    ```json
    {
      "ConnectionStrings": {
-       "DefaultConnection": "Server=localhost;Database=SimpleHotelSystemDB;Trusted_Connection=true;MultipleActiveResultSets=true"
+       "DefaultConnection": "Server=localhost;Database=FinalDestinationDB;Trusted_Connection=true;MultipleActiveResultSets=true"
      }
    }
    ```
@@ -196,7 +196,7 @@
 ### Method 1: Visual Studio
 
 1. **Set Startup Project**
-   - Right-click on `SimpleHotelAPI` project
+   - Right-click on `FinalDestinationAPI` project
    - Select "Set as Startup Project"
 
 2. **Run the Application**
@@ -370,7 +370,7 @@
    ```json
    // .vscode/settings.json
    {
-     "dotnet.defaultSolution": "SimpleHotelAPI.sln",
+     "dotnet.defaultSolution": "FinalDestinationAPI.sln",
      "omnisharp.enableRoslynAnalyzers": true,
      "editor.formatOnSave": true,
      "csharp.format.enable": true
@@ -388,7 +388,7 @@
          "type": "coreclr",
          "request": "launch",
          "preLaunchTask": "build",
-         "program": "${workspaceFolder}/bin/Debug/net8.0/SimpleHotelAPI.dll",
+         "program": "${workspaceFolder}/bin/Debug/net8.0/FinalDestinationAPI.dll",
          "args": [],
          "cwd": "${workspaceFolder}",
          "stopAtEntry": false,
@@ -414,7 +414,7 @@
          "label": "build",
          "command": "dotnet",
          "type": "process",
-         "args": ["build", "${workspaceFolder}/SimpleHotelAPI.csproj"],
+         "args": ["build", "${workspaceFolder}/FinalDestinationAPI.csproj"],
          "problemMatcher": "$msCompile"
        }
      ]
@@ -446,19 +446,19 @@
    
    FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
    WORKDIR /src
-   COPY ["SimpleHotelAPI.csproj", "."]
-   RUN dotnet restore "./SimpleHotelAPI.csproj"
+   COPY ["FinalDestinationAPI.csproj", "."]
+   RUN dotnet restore "./FinalDestinationAPI.csproj"
    COPY . .
    WORKDIR "/src/."
-   RUN dotnet build "SimpleHotelAPI.csproj" -c Release -o /app/build
+   RUN dotnet build "FinalDestinationAPI.csproj" -c Release -o /app/build
    
    FROM build AS publish
-   RUN dotnet publish "SimpleHotelAPI.csproj" -c Release -o /app/publish
+   RUN dotnet publish "FinalDestinationAPI.csproj" -c Release -o /app/publish
    
    FROM base AS final
    WORKDIR /app
    COPY --from=publish /app/publish .
-   ENTRYPOINT ["dotnet", "SimpleHotelAPI.dll"]
+   ENTRYPOINT ["dotnet", "FinalDestinationAPI.dll"]
    ```
 
 2. **Build and Run**
@@ -490,7 +490,7 @@
 {
   "UseLocalDb": true,
   "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=SimpleHotelSystemDB_Dev;Trusted_Connection=true;MultipleActiveResultSets=true"
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=FinalDestinationDB_Dev;Trusted_Connection=true;MultipleActiveResultSets=true"
   },
   "Jwt": {
     "Key": "DevelopmentSuperSecretKeyThatIsAtLeast32CharactersLongForJWTTokenGeneration!",
@@ -516,7 +516,7 @@
 // appsettings.Production.json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=your-prod-server;Database=SimpleHotelSystemDB;User Id=your-user;Password=your-password;Encrypt=true;TrustServerCertificate=false;"
+    "DefaultConnection": "Server=your-prod-server;Database=FinalDestinationDB;User Id=your-user;Password=your-password;Encrypt=true;TrustServerCertificate=false;"
   },
   "Jwt": {
     "Key": "ProductionSuperSecretKeyThatIsAtLeast32CharactersLongForJWTTokenGeneration!",
@@ -609,3 +609,7 @@ For additional help, refer to:
 - [API Documentation](API_DOCUMENTATION.md)
 - [Troubleshooting Guide](TROUBLESHOOTING.md)
 - [Learning Resources](LEARNING_RESOURCES.md)
+
+
+
+

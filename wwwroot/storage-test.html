@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StorageService Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        #output {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>StorageService Test Page</h1>
+    
+    <div class="test-section">
+        <h2>Basic Storage Operations</h2>
+        <button onclick="testBasicOperations()">Test Basic Operations</button>
+        <button onclick="testExpiration()">Test Expiration</button>
+        <button onclick="testTokenStorage()">Test Token Storage</button>
+        <button onclick="testSerialization()">Test Serialization</button>
+        <button onclick="testCleanup()">Test Cleanup</button>
+        <button onclick="clearOutput()">Clear Output</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Storage Info</h2>
+        <button onclick="showStorageInfo()">Show Storage Info</button>
+        <button onclick="checkAvailability()">Check Availability</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test Output</h2>
+        <div id="output"></div>
+    </div>
+
+    <script src="js/utils/storage-service.js"></script>
+    <script>
+        const storage = new StorageService();
+        const output = document.getElementById('output');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'success' ? 'success' : type === 'error' ? 'error' : '';
+            output.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function clearOutput() {
+            output.innerHTML = '';
+        }
+        
+        function testBasicOperations() {
+            log('=== Testing Basic Storage Operations ===');
+            
+            // Test localStorage
+            const testData = { name: 'John Doe', age: 30, active: true };
+            const success = storage.setLocal('test_user', testData);
+            log(`Set localStorage: ${success}`, success ? 'success' : 'error');
+            
+            const retrieved = storage.getLocal('test_user');
+            log(`Retrieved data: ${JSON.stringify(retrieved)}`, retrieved ? 'success' : 'error');
+            
+            // Test sessionStorage
+            const sessionSuccess = storage.setSession('session_data', 'test session value');
+            log(`Set sessionStorage: ${sessionSuccess}`, sessionSuccess ? 'success' : 'error');
+            
+            const sessionRetrieved = storage.getSession('session_data');
+            log(`Retrieved session data: ${sessionRetrieved}`, sessionRetrieved ? 'success' : 'error');
+            
+            log('Basic operations test completed\n');
+        }
+        
+        function testExpiration() {
+            log('=== Testing Expiration ===');
+            
+            // Set item with 1 minute expiration
+            const success = storage.setLocal('expiring_item', 'This will expire', 0.1); // 0.1 minutes = 6 seconds
+            log(`Set expiring item: ${success}`, success ? 'success' : 'error');
+            
+            // Immediately retrieve
+            const immediate = storage.getLocal('expiring_item');
+            log(`Immediate retrieval: ${immediate}`, immediate ? 'success' : 'error');
+            
+            // Test after delay (you would need to wait and manually test)
+            log('Set an item to expire in 6 seconds. Wait and test retrieval manually.');
+            log('Expiration test setup completed\n');
+        }
+        
+        function testTokenStorage() {
+            log('=== Testing Token Storage ===');
+            
+            const testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.test.token';
+            const tokenSet = storage.setToken(testToken, 60);
+            log(`Set token: ${tokenSet}`, tokenSet ? 'success' : 'error');
+            
+            const retrievedToken = storage.getToken();
+            log(`Retrieved token: ${retrievedToken}`, retrievedToken ? 'success' : 'error');
+            
+            const hasValid = storage.hasValidToken();
+            log(`Has valid token: ${hasValid}`, hasValid ? 'success' : 'error');
+            
+            const expiry = storage.getTokenExpiry();
+            log(`Token expiry: ${new Date(expiry).toLocaleString()}`, expiry ? 'success' : 'error');
+            
+            const expiringSoon = storage.isTokenExpiringSoon(5);
+            log(`Token expiring soon: ${expiringSoon}`, 'info');
+            
+            // Test user storage
+            const testUser = { id: 1, name: 'Test User', role: 'customer' };
+            const userSet = storage.setCurrentUser(testUser);
+            log(`Set current user: ${userSet}`, userSet ? 'success' : 'error');
+            
+            const retrievedUser = storage.getCurrentUser();
+            log(`Retrieved user: ${JSON.stringify(retrievedUser)}`, retrievedUser ? 'success' : 'error');
+            
+            log('Token storage test completed\n');
+        }
+        
+        function testSerialization() {
+            log('=== Testing Serialization ===');
+            
+            const complexData = {
+                user: { id: 1, name: 'John' },
+                bookings: [
+                    { id: 1, hotel: 'Hotel A', date: '2024-01-01' },
+                    { id: 2, hotel: 'Hotel B', date: '2024-02-01' }
+                ],
+                preferences: {
+                    theme: 'dark',
+                    notifications: true
+                }
+            };
+            
+            const serialized = storage.serialize(complexData);
+            log(`Serialized data length: ${serialized ? serialized.length : 0}`, serialized ? 'success' : 'error');
+            
+            const deserialized = storage.deserialize(serialized);
+            log(`Deserialized successfully: ${JSON.stringify(deserialized) === JSON.stringify(complexData)}`, 
+                JSON.stringify(deserialized) === JSON.stringify(complexData) ? 'success' : 'error');
+            
+            log('Serialization test completed\n');
+        }
+        
+        function testCleanup() {
+            log('=== Testing Cleanup ===');
+            
+            // Add some test items with short expiration
+            storage.setLocal('cleanup_test_1', 'data1', 0.01); // Very short expiration
+            storage.setLocal('cleanup_test_2', 'data2', 0.01);
+            storage.setSession('cleanup_session', 'session_data', 0.01);
+            
+            log('Added items with very short expiration');
+            
+            // Wait a moment then cleanup
+            setTimeout(() => {
+                const cleaned = storage.cleanupExpiredItems();
+                log(`Cleanup completed: ${cleaned}`, cleaned ? 'success' : 'error');
+                
+                // Try to retrieve cleaned items
+                const item1 = storage.getLocal('cleanup_test_1');
+                const item2 = storage.getLocal('cleanup_test_2');
+                const sessionItem = storage.getSession('cleanup_session');
+                
+                log(`Items after cleanup - item1: ${item1}, item2: ${item2}, session: ${sessionItem}`, 
+                    (!item1 && !item2 && !sessionItem) ? 'success' : 'error');
+            }, 1000);
+            
+            log('Cleanup test initiated (results will appear after 1 second)\n');
+        }
+        
+        function showStorageInfo() {
+            log('=== Storage Information ===');
+            
+            const info = storage.getStorageInfo();
+            if (info) {
+                log(`localStorage: ${info.localStorage.itemCount} items, ~${info.localStorage.estimatedSize} bytes`);
+                log(`sessionStorage: ${info.sessionStorage.itemCount} items, ~${info.sessionStorage.estimatedSize} bytes`);
+            } else {
+                log('Could not retrieve storage info', 'error');
+            }
+            
+            log('Storage info completed\n');
+        }
+        
+        function checkAvailability() {
+            log('=== Storage Availability ===');
+            
+            const availability = storage.isStorageAvailable();
+            log(`localStorage available: ${availability.localStorage}`, availability.localStorage ? 'success' : 'error');
+            log(`sessionStorage available: ${availability.sessionStorage}`, availability.sessionStorage ? 'success' : 'error');
+            
+            log('Availability check completed\n');
+        }
+        
+        // Initialize
+        log('StorageService test page loaded');
+        log('Click buttons above to test different functionality');
+    </script>
+</body>
+</html>

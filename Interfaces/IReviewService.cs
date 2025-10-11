@@ -1,7 +1,7 @@
-using SimpleHotelAPI.DTOs;
-using SimpleHotelAPI.Models;
+using FinalDestinationAPI.DTOs;
+using FinalDestinationAPI.Models;
 
-namespace SimpleHotelAPI.Interfaces;
+namespace FinalDestinationAPI.Interfaces;
 
 public interface IReviewService
 {
@@ -14,3 +14,7 @@ public interface IReviewService
     Task<decimal> CalculateHotelRatingAsync(int hotelId);
     Task<int> GetReviewCountByHotelAsync(int hotelId);
 }
+
+
+
+
