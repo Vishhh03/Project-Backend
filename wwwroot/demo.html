@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinalDestination - Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .demo-info {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .demo-info h3 {
+            color: #0369a1;
+            margin-bottom: 1rem;
+        }
+        .demo-credentials {
+            background: #fefce8;
+            border: 2px solid #eab308;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <h2>FinalDestination</h2>
+                </div>
+                <nav class="nav-links" id="nav-links">
+                    <a href="#/" class="nav-link">Home</a>
+                    <a href="#/hotels" class="nav-link">Hotels</a>
+                    <a href="#/login" class="nav-link" id="auth-link">Login</a>
+                </nav>
+                <button class="mobile-toggle" id="mobile-toggle">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Info -->
+    <div class="container" style="margin-top: 2rem;">
+        <div class="demo-info">
+            <h3>🎉 Frontend Demo - Step 1 Complete!</h3>
+            <p><strong>What's New:</strong></p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                <li>✅ Mock data for 6 beautiful hotels</li>
+                <li>✅ Improved hotel cards with ratings, amenities, and images</li>
+                <li>✅ Enhanced hotel detail pages with booking forms</li>
+                <li>✅ Better responsive design</li>
+                <li>✅ Search functionality</li>
+                <li>✅ Form validation for bookings</li>
+            </ul>
+            
+            <div class="demo-credentials">
+                <strong>Demo Login:</strong><br>
+                Email: any@email.com<br>
+                Password: any password<br>
+                <small>(Mock authentication - any credentials work!)</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="app" class="main">
+        <!-- Content will be loaded here -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 FinalDestination. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

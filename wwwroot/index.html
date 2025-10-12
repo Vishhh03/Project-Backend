@@ -1,190 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="FinalDestination - Your ultimate travel companion for luxury hotel bookings and unforgettable experiences">
-    <meta name="keywords" content="hotel, booking, accommodation, travel, luxury, destination, accessible">
-    <meta name="author" content="FinalDestination">
-    <meta name="theme-color" content="#1e40af">
-    <title>FinalDestination - Luxury Hotel Booking</title>
-
-    <!-- Preconnect to improve performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/accessibility.css">
-    <link rel="stylesheet" href="css/performance.css">
-    <link rel="stylesheet" href="css/modern-enhancements.css">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-
-    <!-- Accessibility enhancements -->
-    <meta name="color-scheme" content="light">
-    <meta name="supported-color-schemes" content="light">
+    <title>FinalDestination - Hotel Booking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <!-- Skip links for keyboard navigation -->
-    <div class="skip-links">
-        <a href="#main-content" class="skip-link">Skip to main content</a>
-        <a href="#main-navigation" class="skip-link">Skip to navigation</a>
-        <a href="#search" class="skip-link">Skip to search</a>
-        <a href="#footer" class="skip-link">Skip to footer</a>
-    </div>
-
-    <!-- Live region for screen reader announcements -->
-    <div id="live-region" class="live-region" aria-live="polite" aria-atomic="true"></div>
-    <div id="live-region-assertive" class="live-region" aria-live="assertive" aria-atomic="true"></div>
-
     <!-- Header -->
-    <header class="header" role="banner">
-        <nav class="navbar" id="main-navigation" role="navigation" aria-label="Main navigation">
-            <div class="navbar-brand">
-                <a href="#/" class="brand-link" aria-label="FinalDestination - Return to homepage">
-                    <img src="assets/icons/logo.svg" alt="" class="brand-logo" role="presentation">
-                    <span class="brand-text">FinalDestination</span>
-                </a>
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <h2>FinalDestination</h2>
+                </div>
+                <nav class="nav-links" id="nav-links">
+                    <a href="#/" class="nav-link">Home</a>
+                    <a href="#/hotels" class="nav-link">Hotels</a>
+                    <a href="#/login" class="nav-link" id="auth-link">Login</a>
+                </nav>
+                <button class="mobile-toggle" id="mobile-toggle">☰</button>
             </div>
-
-            <button class="navbar-toggle" id="navbar-toggle" aria-label="Toggle navigation menu" aria-expanded="false"
-                aria-controls="navbar-menu" type="button">
-                <span class="hamburger-line" aria-hidden="true"></span>
-                <span class="hamburger-line" aria-hidden="true"></span>
-                <span class="hamburger-line" aria-hidden="true"></span>
-                <span class="sr-only">Menu</span>
-            </button>
-
-            <div class="navbar-menu" id="navbar-menu" aria-hidden="true" aria-labelledby="navbar-toggle">
-                <ul class="navbar-nav" role="menubar" aria-label="Main menu">
-                    <!-- Navigation items will be dynamically populated by JavaScript -->
-                </ul>
-            </div>
-        </nav>
+        </div>
     </header>
 
     <!-- Main Content -->
-    <main id="main-content" class="main-content" role="main" tabindex="-1">
-        <!-- Page title for screen readers -->
-        <h1 class="sr-only" id="page-title">FinalDestination - Luxury Hotel Booking</h1>
-
-        <!-- Loading Spinner -->
-        <div class="loading-spinner" id="loading-spinner" aria-hidden="true" aria-live="polite"
-            aria-label="Loading content">
-            <div class="spinner" aria-hidden="true"></div>
-            <span class="loading-text">Loading content, please wait...</span>
-        </div>
-
-        <!-- App Container -->
-        <div class="app-container" id="app-container" role="application" aria-label="Hotel booking application">
-            <!-- Dynamic content will be loaded here -->
-            <div class="sr-only" id="content-description">
-                Main application content area. Use tab key to navigate through interactive elements.
-            </div>
-        </div>
+    <main id="app" class="main">
+        <!-- Content will be loaded here -->
     </main>
 
     <!-- Footer -->
-    <footer class="footer" id="footer" role="contentinfo" aria-label="Site footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>FinalDestination</h3>
-                <p>Your ultimate travel companion for luxury accommodations and unforgettable experiences worldwide.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <nav aria-label="Footer navigation">
-                    <ul>
-                        <li><a href="#/hotels" aria-label="Browse available hotels">Hotels</a></li>
-                        <li><a href="#/bookings" aria-label="View your bookings">Bookings</a></li>
-                        <li><a href="#/loyalty" aria-label="Loyalty program information">Loyalty</a></li>
-                        <li><a href="#/support" aria-label="Contact customer support">Support</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="footer-section">
-                <h4>Contact Information</h4>
-                <address>
-                    <p>Email: <a href="mailto:support@finaldestination.com"
-                            aria-label="Send email to support">support@finaldestination.com</a></p>
-                    <p>Phone: <a href="tel:+15551234567" aria-label="Call support at +1 555 123 4567">+1 (555)
-                            123-4567</a></p>
-                </address>
-            </div>
-        </div>
-        <div class="footer-bottom">
+    <footer class="footer">
+        <div class="container">
             <p>&copy; 2024 FinalDestination. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Notification Container -->
-    <div class="notification-container" id="notification-container" aria-live="polite" aria-atomic="true"
-        aria-label="Notifications">
-        <!-- Toast notifications will be inserted here -->
-    </div>
-
-    <!-- Modal Container -->
-    <div class="modal-overlay" id="modal-overlay" aria-hidden="true" role="presentation">
-        <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title"
-            aria-describedby="modal-description">
-            <!-- Modal content will be inserted here -->
-        </div>
-    </div>
-
-    <!-- JavaScript Files -->
-    <!-- Browser Compatibility (load first) -->
-    <script src="js/utils/browser-compatibility.js"></script>
-
-    <!-- Utilities (load in order) -->
-    <script src="js/utils/error-handler.js"></script>
-    <script src="js/utils/offline-manager.js"></script>
-    <script src="js/utils/validator.js"></script>
-    <script src="js/utils/accessibility-manager.js"></script>
-    <script src="js/utils/performance-manager.js"></script>
-    <script src="js/utils/api-client.js"></script>
-    <script src="js/utils/storage-service.js"></script>
-    <script src="js/utils/router.js"></script>
-    <script src="js/utils/ui-enhancements.js"></script>
-
-    <!-- Configuration -->
-    <script src="js/config/app-config.js"></script>
-    <script src="js/config/build-config.js"></script>
-    <script src="js/config/production-config.js"></script>
-
-    <!-- Infrastructure -->
-    <script src="js/utils/app-lifecycle.js"></script>
-    <script src="js/utils/state-manager.js"></script>
-    <script src="js/utils/event-bus.js"></script>
-    <script src="js/utils/component-integration.js"></script>
-    <script src="js/utils/bundle-optimizer.js"></script>
-    <script src="js/utils/auth-state-manager.js"></script>
-
-    <!-- Models -->
-    <script src="js/models/hotel.js"></script>
-
-    <!-- Services -->
-    <script src="js/services/notification-service.js"></script>
-    <script src="js/services/auth-service.js"></script>
-    <script src="js/services/hotel-service.js"></script>
-    <script src="js/services/admin-service.js"></script>
-
-    <!-- Components -->
-    <script src="js/components/auth/login-component.js"></script>
-    <script src="js/components/auth/register-component.js"></script>
-    <script src="js/components/hotels/hotel-detail-component.js"></script>
-    <script src="js/components/admin/admin-dashboard-component.js"></script>
-    <script src="js/components/admin/hotel-management-component.js"></script>
-
-    <!-- Main Application (load last) -->
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/router.js"></script>
     <script src="js/app.js"></script>
 </body>
-
 </html>
