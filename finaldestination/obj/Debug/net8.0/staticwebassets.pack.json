@@ -1,0 +1,65 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\README.md",
+      "PackagePath": "staticwebassets\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\assets\\icons\\favicon.ico",
+      "PackagePath": "staticwebassets\\assets\\icons\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\assets\\icons\\logo.svg",
+      "PackagePath": "staticwebassets\\assets\\icons\\logo.svg"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\demo.html",
+      "PackagePath": "staticwebassets\\demo.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\js\\api.js",
+      "PackagePath": "staticwebassets\\js\\api.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\js\\auth.js",
+      "PackagePath": "staticwebassets\\js\\auth.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\js\\router.js",
+      "PackagePath": "staticwebassets\\js\\router.js"
+    },
+    {
+      "Id": "C:\\Users\\visha\\Desktop\\CTS\\Hotel-Booking-Management\\finaldestination\\wwwroot\\js\\utils.js",
+      "PackagePath": "staticwebassets\\js\\utils.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.finaldestination.props",
+      "PackagePath": "build\\finaldestination.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.finaldestination.props",
+      "PackagePath": "buildMultiTargeting\\finaldestination.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.finaldestination.props",
+      "PackagePath": "buildTransitive\\finaldestination.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.finaldestination.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

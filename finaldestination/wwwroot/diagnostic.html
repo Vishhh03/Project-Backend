@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Diagnostic Tool</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #1a1a2e; margin-top: 0; }
+        h2 { color: #e94560; font-size: 1.2rem; }
+        .status { padding: 10px; border-radius: 8px; margin: 10px 0; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+        }
+        button:hover { background: #ff6b88; }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .loading { display: inline-block; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🔍 FinalDestination API Diagnostic</h1>
+        <p>This tool helps diagnose connection issues between the frontend and API.</p>
+    </div>
+
+    <div class="card">
+        <h2>Current Configuration</h2>
+        <div id="config-info"></div>
+    </div>
+
+    <div class="card">
+        <h2>API Connection Tests</h2>
+        <button onclick="testConnection()">🔄 Test API Connection</button>
+        <button onclick="testHotels()">🏨 Test Hotels Endpoint</button>
+        <button onclick="testAuth()">🔐 Test Auth Endpoint</button>
+        <div id="test-results"></div>
+    </div>
+
+    <div class="card">
+        <h2>Quick Fixes</h2>
+        <div class="info status">
+            <strong>If you see 404 errors:</strong><br>
+            1. Make sure the API is running: <code>dotnet run</code><br>
+            2. Verify it's on port 7000: <code>https://localhost:7000</code><br>
+            3. Check Swagger UI loads: <a href="https://localhost:7000" target="_blank">Open Swagger</a>
+        </div>
+        <div class="info status">
+            <strong>If you see CORS errors:</strong><br>
+            The API has CORS enabled. Make sure you're running in Development mode.
+        </div>
+        <div class="info status">
+            <strong>If you see SSL errors:</strong><br>
+            Trust the development certificate: <code>dotnet dev-certs https --trust</code>
+        </div>
+    </div>
+
+    <script>
+        // Display current configuration
+        const port = window.location.port;
+        const apiUrl = port === '5500' || port === '5501' || port === '3000'
+            ? 'https://localhost:7000/api'
+            : '/api';
+
+        document.getElementById('config-info').innerHTML = `
+            <div class="info status">
+                <strong>Current Port:</strong> ${port || '(default)'}<br>
+                <strong>API Base URL:</strong> ${apiUrl}<br>
+                <strong>Full URL Example:</strong> ${apiUrl}/hotels
+            </div>
+        `;
+
+        async function testConnection() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<div class="info status"><span class="loading">⏳</span> Testing connection...</div>';
+
+            try {
+                const response = await fetch(`${apiUrl}/hotels`);
+                const data = await response.json();
+                
+                results.innerHTML = `
+                    <div class="success status">
+                        ✅ <strong>Success!</strong> API is reachable.<br>
+                        Status: ${response.status}<br>
+                        Hotels found: ${data.length}
+                    </div>
+                    <pre>${JSON.stringify(data.slice(0, 2), null, 2)}</pre>
+                `;
+            } catch (error) {
+                results.innerHTML = `
+                    <div class="error status">
+                        ❌ <strong>Connection Failed</strong><br>
+                        Error: ${error.message}<br><br>
+                        <strong>Possible causes:</strong><br>
+                        • API is not running<br>
+                        • API is running on a different port<br>
+                        • SSL certificate not trusted<br>
+                        • CORS issue<br><br>
+                        <strong>Solution:</strong><br>
+                        1. Start the API: <code>cd finaldestination && dotnet run</code><br>
+                        2. Verify it's running: <a href="https://localhost:7000" target="_blank">https://localhost:7000</a>
+                    </div>
+                `;
+            }
+        }
+
+        async function testHotels() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<div class="info status"><span class="loading">⏳</span> Testing hotels endpoint...</div>';
+
+            try {
+                const response = await fetch(`${apiUrl}/hotels`);
+                const data = await response.json();
+                
+                results.innerHTML = `
+                    <div class="success status">
+                        ✅ <strong>Hotels Endpoint Working!</strong><br>
+                        Found ${data.length} hotels
+                    </div>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                results.innerHTML = `
+                    <div class="error status">
+                        ❌ <strong>Hotels Endpoint Failed</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        async function testAuth() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<div class="info status"><span class="loading">⏳</span> Testing auth endpoint...</div>';
+
+            try {
+                const response = await fetch(`${apiUrl}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: 'admin@hotel.com',
+                        password: 'Admin123!'
+                    })
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    results.innerHTML = `
+                        <div class="success status">
+                            ✅ <strong>Auth Endpoint Working!</strong><br>
+                            Successfully logged in as: ${data.user.name}<br>
+                            Role: ${data.user.role}
+                        </div>
+                    `;
+                } else {
+                    results.innerHTML = `
+                        <div class="error status">
+                            ❌ <strong>Auth Failed</strong><br>
+                            ${data.message || 'Unknown error'}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                results.innerHTML = `
+                    <div class="error status">
+                        ❌ <strong>Auth Endpoint Failed</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Auto-test on load
+        window.addEventListener('load', () => {
+            setTimeout(testConnection, 500);
+        });
+    </script>
+</body>
+</html>

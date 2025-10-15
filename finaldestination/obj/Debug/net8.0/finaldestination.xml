@@ -1,0 +1,741 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>finaldestination</name>
+    </assembly>
+    <members>
+        <member name="T:FinalDestinationAPI.Configuration.CacheSettings">
+            <summary>
+            Cache configuration settings
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Configuration.JwtSettings">
+            <summary>
+            JWT configuration settings
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Configuration.LoyaltySettings">
+            <summary>
+            Loyalty program configuration settings
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Configuration.PaymentSettings">
+            <summary>
+            Payment service configuration settings
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Controllers.AuthController">
+            <summary>
+            Controller for user authentication operations
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.AuthController.Register(FinalDestinationAPI.DTOs.RegisterRequest)">
+            <summary>
+            Register a new user account
+            </summary>
+            <param name="request">User registration information</param>
+            <returns>Authentication response with JWT token</returns>
+            <response code="201">User registered successfully</response>
+            <response code="400">Invalid registration data or email already exists</response>
+            <response code="500">Internal server error</response>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.AuthController.Login(FinalDestinationAPI.DTOs.LoginRequest)">
+            <summary>
+            Login with email and password
+            </summary>
+            <param name="request">Login credentials</param>
+            <returns>Authentication response with JWT token</returns>
+            <response code="200">Login successful</response>
+            <response code="400">Invalid login data</response>
+            <response code="401">Invalid credentials or inactive account</response>
+            <response code="500">Internal server error</response>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.AuthController.GetCurrentUser">
+            <summary>
+            Get current user information (requires authentication)
+            </summary>
+            <returns>Current user information</returns>
+            <response code="200">User information retrieved successfully</response>
+            <response code="401">Not authenticated</response>
+            <response code="404">User not found</response>
+            <response code="500">Internal server error</response>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.AuthController.CreateUserInfoAsync(FinalDestinationAPI.Models.User)">
+            <summary>
+            Helper method to create UserInfo with loyalty account information
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.BookingsController.GetCurrentUserId">
+            <summary>
+            Gets the current user ID from the JWT token
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.BookingsController.MapToBookingResponse(FinalDestinationAPI.Models.Booking)">
+            <summary>
+            Maps a Booking entity to a BookingResponse DTO
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.HotelsController.GetHotels">
+            <summary>
+            Gets all hotels with caching (10-minute expiration)
+            </summary>
+            <returns>List of all hotels</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.HotelsController.GetHotel(System.Int32)">
+            <summary>
+            Gets a specific hotel by ID with caching
+            </summary>
+            <param name="id">Hotel ID</param>
+            <returns>Hotel details</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.HotelsController.SearchHotels(System.String,System.Nullable{System.Decimal})">
+            <summary>
+            Searches hotels by city and/or maximum price with caching
+            </summary>
+            <param name="city">City to search in (optional)</param>
+            <param name="maxPrice">Maximum price per night (optional)</param>
+            <returns>List of matching hotels</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.HotelsController.CreateHotel(FinalDestinationAPI.DTOs.CreateHotelRequest)">
+            <summary>
+            Creates a new hotel (requires HotelManager or Admin role)
+            </summary>
+            <param name="request">Hotel creation request</param>
+            <returns>Created hotel</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.HotelsController.UpdateHotel(System.Int32,FinalDestinationAPI.DTOs.UpdateHotelRequest)">
+            <summary>
+            Updates an existing hotel (requires HotelManager or Admin role)
+            </summary>
+            <param name="id">Hotel ID</param>
+            <param name="request">Hotel update request</param>
+            <returns>No content on success</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.HotelsController.DeleteHotel(System.Int32)">
+            <summary>
+            Deletes a hotel (requires Admin role)
+            </summary>
+            <param name="id">Hotel ID</param>
+            <returns>No content on success</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.HotelsController.InvalidateHotelCaches">
+            <summary>
+            Invalidates all hotel-related caches
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.HotelsController.HotelExistsAsync(System.Int32)">
+            <summary>
+            Checks if a hotel exists asynchronously
+            </summary>
+            <param name="id">Hotel ID</param>
+            <returns>True if hotel exists, false otherwise</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.LoyaltyController.GetMyLoyaltyAccount">
+            <summary>
+            Get loyalty account for the current user
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.LoyaltyController.GetLoyaltyAccount(System.Int32)">
+            <summary>
+            Get loyalty account for a specific user (Admin only)
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.LoyaltyController.CreateLoyaltyAccount(FinalDestinationAPI.DTOs.CreateLoyaltyAccountRequest)">
+            <summary>
+            Create loyalty account for a specific user (Admin only)
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.LoyaltyController.GetMyPointsHistory(System.Int32,System.Int32)">
+            <summary>
+            Get points transaction history for the current user
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.LoyaltyController.GetPointsHistory(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get points transaction history for a specific user (Admin only)
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.LoyaltyController.AwardPoints(FinalDestinationAPI.DTOs.AwardPointsRequest)">
+            <summary>
+            Award points manually (Admin only)
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.LoyaltyController.CalculatePoints(System.Decimal)">
+            <summary>
+            Calculate points for a given booking amount
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.PaymentsController.ProcessPayment(FinalDestinationAPI.DTOs.PaymentRequest)">
+            <summary>
+            Process a payment for a booking
+            </summary>
+            <param name="request">Payment details</param>
+            <returns>Payment result with transaction details</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.PaymentsController.GetPayment(System.Int32)">
+            <summary>
+            Get payment details by payment ID
+            </summary>
+            <param name="id">Payment ID</param>
+            <returns>Payment details</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.PaymentsController.RefundPayment(System.Int32,FinalDestinationAPI.DTOs.RefundRequest)">
+            <summary>
+            Process a refund for a payment
+            </summary>
+            <param name="id">Payment ID</param>
+            <param name="request">Refund details</param>
+            <returns>Refund result</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.ReviewsController.GetReviewsByHotel(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get all reviews for a specific hotel with pagination
+            </summary>
+            <param name="hotelId">Hotel ID</param>
+            <param name="page">Page number (default: 1)</param>
+            <param name="pageSize">Page size (default: 10, max: 50)</param>
+            <returns>List of reviews for the hotel</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.ReviewsController.GetReview(System.Int32)">
+            <summary>
+            Get a specific review by ID
+            </summary>
+            <param name="id">Review ID</param>
+            <returns>Review details</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.ReviewsController.GetMyReviews">
+            <summary>
+            Get all reviews by the current authenticated user
+            </summary>
+            <returns>List of user's reviews</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.ReviewsController.CreateReview(FinalDestinationAPI.DTOs.ReviewRequest)">
+            <summary>
+            Create a new review for a hotel
+            </summary>
+            <param name="request">Review details</param>
+            <returns>Created review</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.ReviewsController.UpdateReview(System.Int32,FinalDestinationAPI.DTOs.UpdateReviewRequest)">
+            <summary>
+            Update an existing review
+            </summary>
+            <param name="id">Review ID</param>
+            <param name="request">Updated review details</param>
+            <returns>Updated review</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.ReviewsController.DeleteReview(System.Int32)">
+            <summary>
+            Delete a review
+            </summary>
+            <param name="id">Review ID</param>
+            <returns>No content if successful</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Controllers.ReviewsController.GetHotelRatingStats(System.Int32)">
+            <summary>
+            Get hotel rating statistics
+            </summary>
+            <param name="hotelId">Hotel ID</param>
+            <returns>Rating statistics</returns>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.AuthResponse">
+            <summary>
+            Response DTO for authentication operations (login/register)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.AuthResponse.Token">
+            <summary>
+            JWT token for authentication
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.AuthResponse.ExpiresAt">
+            <summary>
+            Token expiration date and time
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.AuthResponse.User">
+            <summary>
+            User information
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.UserInfo">
+            <summary>
+            User information included in authentication response
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.Id">
+            <summary>
+            User's unique identifier
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.Name">
+            <summary>
+            User's full name
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.Email">
+            <summary>
+            User's email address
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.Role">
+            <summary>
+            User's role in the system
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.ContactNumber">
+            <summary>
+            User's contact number (if provided)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.CreatedAt">
+            <summary>
+            Account creation date
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.LastLoginAt">
+            <summary>
+            Last login date (if available)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.IsActive">
+            <summary>
+            Whether the account is active
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.UserInfo.LoyaltyAccount">
+            <summary>
+            User's loyalty account information
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.LoyaltyInfo">
+            <summary>
+            Loyalty account information included in user info
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.LoyaltyInfo.PointsBalance">
+            <summary>
+            Current points balance
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.LoyaltyInfo.TotalPointsEarned">
+            <summary>
+            Total points earned throughout account lifetime
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.LoyaltyInfo.LastUpdated">
+            <summary>
+            Last time the loyalty account was updated
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.CreateBookingRequest">
+            <summary>
+            Request DTO for creating a new booking with comprehensive validation
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.CreateBookingRequest.GuestName">
+            <summary>
+            Guest's full name
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.CreateBookingRequest.GuestEmail">
+            <summary>
+            Guest's email address
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.CreateBookingRequest.HotelId">
+            <summary>
+            ID of the hotel to book
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.CreateBookingRequest.CheckInDate">
+            <summary>
+            Check-in date (cannot be in the past)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.CreateBookingRequest.CheckOutDate">
+            <summary>
+            Check-out date (must be after check-in date)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.CreateBookingRequest.NumberOfGuests">
+            <summary>
+            Number of guests (1-10)
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.CreateHotelRequest">
+            <summary>
+            Request DTO for creating a new hotel with comprehensive validation
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.LoginRequest">
+            <summary>
+            Request DTO for user login
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.LoginRequest.Email">
+            <summary>
+            User's email address
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.LoginRequest.Password">
+            <summary>
+            User's password
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.PaymentRequest">
+            <summary>
+            Request DTO for processing payments with comprehensive validation
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.BookingId">
+            <summary>
+            ID of the booking to pay for
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.Amount">
+            <summary>
+            Payment amount (must be positive)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.Currency">
+            <summary>
+            Currency code (3-letter ISO code)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.PaymentMethod">
+            <summary>
+            Payment method
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.CardNumber">
+            <summary>
+            Credit card number (required for card payments)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.CardHolderName">
+            <summary>
+            Card holder's name (required for card payments)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.ExpiryMonth">
+            <summary>
+            Card expiry month (01-12)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.ExpiryYear">
+            <summary>
+            Card expiry year (2-digit format)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.PaymentRequest.CVV">
+            <summary>
+            Card verification value (3-4 digits)
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.RegisterRequest">
+            <summary>
+            Request DTO for user registration
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.RegisterRequest.Name">
+            <summary>
+            User's full name
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.RegisterRequest.Email">
+            <summary>
+            User's email address (must be unique)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.RegisterRequest.Password">
+            <summary>
+            User's password (will be hashed before storage)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.RegisterRequest.ConfirmPassword">
+            <summary>
+            Password confirmation (must match password)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.RegisterRequest.Role">
+            <summary>
+            User's role (defaults to Guest)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.RegisterRequest.ContactNumber">
+            <summary>
+            Optional contact number
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.ReviewRequest">
+            <summary>
+            Request DTO for creating or updating a hotel review with comprehensive validation
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.ReviewRequest.HotelId">
+            <summary>
+            ID of the hotel being reviewed
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.ReviewRequest.Rating">
+            <summary>
+            Rating from 1 (poor) to 5 (excellent)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.DTOs.ReviewRequest.Comment">
+            <summary>
+            Optional review comment
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.DTOs.UpdateHotelRequest">
+            <summary>
+            Request DTO for updating an existing hotel with comprehensive validation
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Extensions.ValidationExtensions">
+            <summary>
+            Extension methods for validation and error handling
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Extensions.ValidationExtensions.ValidationError(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.String[])">
+            <summary>
+            Creates a standardized BadRequest response with validation errors
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Extensions.ValidationExtensions.ValidationError(Microsoft.AspNetCore.Mvc.ControllerBase,FinalDestinationAPI.Services.ValidationResult)">
+            <summary>
+            Creates a standardized BadRequest response from ValidationResult
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Extensions.ValidationExtensions.NotFoundError(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.String)">
+            <summary>
+            Creates a standardized NotFound response
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Extensions.ValidationExtensions.UnauthorizedError(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.String)">
+            <summary>
+            Creates a standardized Unauthorized response
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Extensions.ValidationExtensions.ForbiddenError(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.String)">
+            <summary>
+            Creates a standardized Forbidden response
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Extensions.ValidationExtensions.ConflictError(Microsoft.AspNetCore.Mvc.ControllerBase,System.String,System.String)">
+            <summary>
+            Creates a standardized Conflict response
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Filters.ValidationFilter">
+            <summary>
+            Action filter to handle model validation errors consistently
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Interfaces.ICacheService">
+            <summary>
+            Interface for caching operations with configurable expiration and pattern-based removal
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.ICacheService.GetAsync``1(System.String)">
+            <summary>
+            Retrieves a cached value by key
+            </summary>
+            <typeparam name="T">Type of the cached object</typeparam>
+            <param name="key">Cache key</param>
+            <returns>Cached value or null if not found</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.ICacheService.SetAsync``1(System.String,``0,System.Nullable{System.TimeSpan})">
+            <summary>
+            Sets a value in cache with optional expiration
+            </summary>
+            <typeparam name="T">Type of the object to cache</typeparam>
+            <param name="key">Cache key</param>
+            <param name="value">Value to cache</param>
+            <param name="expiration">Optional expiration time (defaults to 30 minutes)</param>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.ICacheService.RemoveAsync(System.String)">
+            <summary>
+            Removes a specific cache entry by key
+            </summary>
+            <param name="key">Cache key to remove</param>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.ICacheService.RemoveByPatternAsync(System.String)">
+            <summary>
+            Removes cache entries matching a pattern (e.g., "hotels:*")
+            </summary>
+            <param name="pattern">Pattern to match cache keys</param>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.ICacheService.ExistsAsync(System.String)">
+            <summary>
+            Checks if a cache key exists
+            </summary>
+            <param name="key">Cache key to check</param>
+            <returns>True if key exists, false otherwise</returns>
+        </member>
+        <member name="T:FinalDestinationAPI.Interfaces.IJwtService">
+            <summary>
+            Service for JWT token management including generation and validation
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.IJwtService.GenerateToken(FinalDestinationAPI.Models.User)">
+            <summary>
+            Generates a JWT token for the specified user
+            </summary>
+            <param name="user">The user to generate the token for</param>
+            <returns>JWT token string</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.IJwtService.ValidateToken(System.String)">
+            <summary>
+            Validates a JWT token and returns the claims principal
+            </summary>
+            <param name="token">The JWT token to validate</param>
+            <returns>ClaimsPrincipal if valid, null if invalid</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.IJwtService.GetUserIdFromToken(System.String)">
+            <summary>
+            Extracts the user ID from a JWT token
+            </summary>
+            <param name="token">The JWT token</param>
+            <returns>User ID if valid, null if invalid</returns>
+        </member>
+        <member name="M:FinalDestinationAPI.Interfaces.IJwtService.GetUserRoleFromToken(System.String)">
+            <summary>
+            Extracts the user role from a JWT token
+            </summary>
+            <param name="token">The JWT token</param>
+            <returns>User role if valid, null if invalid</returns>
+        </member>
+        <member name="T:FinalDestinationAPI.Middleware.ErrorHandlingMiddleware">
+            <summary>
+            Global error handling middleware for consistent error responses
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Models.ErrorResponse">
+            <summary>
+            Standard error response format for the API
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.Models.ErrorResponse.Message">
+            <summary>
+            Main error message
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.Models.ErrorResponse.Details">
+            <summary>
+            Additional error details (optional)
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.Models.ErrorResponse.Timestamp">
+            <summary>
+            Timestamp when the error occurred
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.Models.ErrorResponse.StatusCode">
+            <summary>
+            HTTP status code
+            </summary>
+        </member>
+        <member name="P:FinalDestinationAPI.Models.ErrorResponse.ValidationErrors">
+            <summary>
+            Validation errors (for model validation failures)
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Services.CacheService">
+            <summary>
+            Memory cache service implementation with configurable expiration and pattern-based removal
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.CacheService.GetAsync``1(System.String)">
+            <summary>
+            Retrieves a cached value by key
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.CacheService.SetAsync``1(System.String,``0,System.Nullable{System.TimeSpan})">
+            <summary>
+            Sets a value in cache with optional expiration
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.CacheService.RemoveAsync(System.String)">
+            <summary>
+            Removes a specific cache entry by key
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.CacheService.RemoveByPatternAsync(System.String)">
+            <summary>
+            Removes cache entries matching a pattern (e.g., "hotels:*")
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.CacheService.ExistsAsync(System.String)">
+            <summary>
+            Checks if a cache key exists
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Services.JwtService">
+            <summary>
+            JWT service implementation for token generation and validation
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.JwtService.GenerateToken(FinalDestinationAPI.Models.User)">
+            <summary>
+            Generates a JWT token for the specified user
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.JwtService.ValidateToken(System.String)">
+            <summary>
+            Validates a JWT token and returns the claims principal
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.JwtService.GetUserIdFromToken(System.String)">
+            <summary>
+            Extracts the user ID from a JWT token
+            </summary>
+        </member>
+        <member name="M:FinalDestinationAPI.Services.JwtService.GetUserRoleFromToken(System.String)">
+            <summary>
+            Extracts the user role from a JWT token
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Services.IValidationService">
+            <summary>
+            Service for handling complex business rule validation
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Services.ValidationResult">
+            <summary>
+            Result of validation operation
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Validation.FutureDateAttribute">
+            <summary>
+            Validates that a date is not in the past
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Validation.DateAfterAttribute">
+            <summary>
+            Validates that a date is after another date property
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Validation.DateRangeAttribute">
+            <summary>
+            Validates that a date range is within reasonable limits
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Validation.CurrencyCodeAttribute">
+            <summary>
+            Validates currency code format (3 uppercase letters)
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Validation.CreditCardAttribute">
+            <summary>
+            Validates credit card number using Luhn algorithm
+            </summary>
+        </member>
+        <member name="T:FinalDestinationAPI.Validation.ExpiryDateAttribute">
+            <summary>
+            Validates that expiry date is not in the past
+            </summary>
+        </member>
+    </members>
+</doc>
